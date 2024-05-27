@@ -1,0 +1,17 @@
+class Solution(object):
+    def rightSideView(self, root):
+        if root is None:
+            return []
+        queue = deque()
+        queue.append(root)
+        lst = []
+        while queue:
+            curr = []
+            for i in range (len(queue)):
+                node = queue.popleft()
+                if node.left:
+                    queue.append(node.left)
+                if node.right:
+                    queue.append(node.right)
+            lst.append(node.val)
+        return lst
