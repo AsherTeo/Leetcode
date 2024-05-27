@@ -1,0 +1,20 @@
+import numpy as np
+class Solution(object):
+    def averageOfLevels(self, root):
+        if root is None:
+            return 0
+        queue = deque()
+        queue.append(root)
+        res = []
+        while queue:
+            stack = []
+            for i in range(len(queue)):
+                node = queue.popleft()
+                stack.append(node.val)
+                ave = round(np.mean(stack),5)
+                if node.left:
+                    queue.append(node.left)
+                if node.right:
+                    queue.append(node.right)
+            res.append(ave)
+        return res
