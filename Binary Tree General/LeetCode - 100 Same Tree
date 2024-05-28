@@ -40,7 +40,6 @@ class Solution(object):
             return res
         p_res = bfs(p)
         q_res = bfs(q)
-        print(p_res, q_res)
         if p_res == q_res:
             return True
         return False
