@@ -1,0 +1,9 @@
+class Solution(object):
+    def inorderTraversal(self, root):
+        if root is None:
+            return []
+        element = []
+        element.extend(self.inorderTraversal(root.left))
+        element.append(root.val)
+        element.extend(self.inorderTraversal(root.right))
+        return element
