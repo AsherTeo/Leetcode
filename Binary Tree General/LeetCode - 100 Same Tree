@@ -1,0 +1,46 @@
+##################################### DFS Approach (Pre Order) #################################
+
+class Solution(object):
+    def isSameTree(self, p, q):
+        def dfs(root):
+            if root is None:
+                return [None]
+
+            element = [] # (Root, Left, Right)
+            element.append(root.val)
+            element.extend(dfs(root.left))
+            element.extend(dfs(root.right))
+            return element
+            
+        p_res = dfs(p)
+        q_res = dfs(q)
+        if p_res == q_res:
+            return True
+        return False
+
+################################### BFS Approach #####################################
+
+class Solution(object):
+    def isSameTree(self, p, q):
+        def bfs(root):
+            if root is None:
+                return [None]
+
+            queue = deque()
+            queue.append(root)
+            res = []
+            while queue:
+                node = queue.popleft()
+                if node:
+                    res.append(node.val)
+                    queue.append(node.left)
+                    queue.append(node.right)
+                else:
+                    res.append(None)
+            return res
+        p_res = bfs(p)
+        q_res = bfs(q)
+        print(p_res, q_res)
+        if p_res == q_res:
+            return True
+        return False
