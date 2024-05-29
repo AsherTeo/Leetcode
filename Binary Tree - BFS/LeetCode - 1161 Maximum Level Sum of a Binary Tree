@@ -1,0 +1,23 @@
+########################################################## First Attempt ################################
+
+import numpy as np
+class Solution(object):
+    def maxLevelSum(self, root):
+        queue = deque()
+        queue.append(root)
+        lst = []
+        while queue:
+            curr = []
+            for i in range(len(queue)):
+                node = queue.popleft()
+                curr.append(node.val)
+                sum_curr = sum(curr)
+                if node.left:
+                    queue.append(node.left)
+                if node.right:
+                    queue.append(node.right)
+            lst.append(sum_curr)
+      
+        return np.argmax(lst) + 1
+
+
