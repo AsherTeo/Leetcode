@@ -3,29 +3,6 @@ class Solution(object):
     def pathSum(self, root, targetSum):
         if not root:
             return []
-        stack = [(root, [root.val])]
-        res = []
-        ans = []
-        while stack:
-            node, path = stack.pop()
-            if node.left is None and node.right is None:
-                res.append(path)
-        
-            if node.right:
-                stack.append((node.right, path + [node.right.val]))
-            if node.left:
-                stack.append((node.left, path + [node.left.val]))
-
-        while res:
-            element = res.pop()
-            if sum(element) == targetSum:
-                ans.append(element)
-        return ans
-################################################### DFS Method 2 #####################################################
-class Solution(object):
-    def pathSum(self, root, targetSum):
-        if not root:
-            return []
         stack = [(root, root.val, [root.val])]
         res = []
         while stack:
