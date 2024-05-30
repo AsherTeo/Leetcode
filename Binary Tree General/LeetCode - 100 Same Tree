@@ -11,13 +11,7 @@ class Solution(object):
             element.extend(dfs(root.left))
             element.extend(dfs(root.right))
             return element
-            
-        p_res = dfs(p)
-        q_res = dfs(q)
-        if p_res == q_res:
-            return True
-        return False
-
+        return (dfs(p) == dfs(q))
 ################################### BFS Approach #####################################
 
 class Solution(object):
@@ -38,8 +32,4 @@ class Solution(object):
                 else:
                     res.append(None)
             return res
-        p_res = bfs(p)
-        q_res = bfs(q)
-        if p_res == q_res:
-            return True
-        return False
+        return (bfs(p) == bfs(q))
