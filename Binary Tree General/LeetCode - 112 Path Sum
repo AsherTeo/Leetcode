@@ -4,37 +4,15 @@ class Solution(object):
     def hasPathSum(self, root, targetSum):
         if root is None:
             return False
-        stack = [(root, [root.val])]
-        res = []
-        while stack:
-            curr = []
-            node, path = stack.pop()
-            if node.left is None and node.right is None:
-                res.append(sum(path))
-            if node.left:
-                stack.append((node.left, path + [node.left.val]))
-            if node.right:
-                stack.append((node.right, path + [node.right.val]))
-
-        if targetSum in res:
-            return True
-        return False
-
-########################################### DFS Method 1b #######################################################
-
-class Solution(object):
-    def hasPathSum(self, root, targetSum):
-        if root is None:
-            return False
         stack = [(root, root.val)]
-        res = []
+        
         while stack:
-            curr = []
-            node, path = stack.pop()
-            if node.left is None and node.right is None:
-                if targetSum == path:
-                    return True
-            if node.left:
-                stack.append((node.left, path + node.left.val))
+            node, curr_sum = stack.pop()
+            if node.left is None and node.right is None and curr_sum == targetSum:
+                return True
+                
             if node.right:
-                stack.append((node.right, path + node.right.val))
+                stack.append((node.right, curr_sum + node.right.val))
+            if node.left:
+                stack.append((node.left, curr_sum + node.left.val))
+        return False
