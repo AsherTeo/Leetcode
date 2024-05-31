@@ -8,5 +8,4 @@ class Solution(object):
             res.append(node.val)
             in_order_dfs(node.right, res)
             return res
-        ans = in_order_dfs(root, [])
-        return ans[k-1]
+        return in_order_dfs(root, [])[k-1]
