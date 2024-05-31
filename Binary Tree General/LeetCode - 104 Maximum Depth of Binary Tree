@@ -1,0 +1,32 @@
+##################################################### DFS Recursive ############################################# 
+
+class Solution(object):
+    def maxDepth(self, root):
+        def dfs(root, depth):
+            if root is None:
+                return 0
+            depth += 1
+            if root.left is None and root.right is None:
+                return depth
+            return max(dfs(root.left, depth), dfs(root.right, depth))
+        return dfs(root, 0)
+
+##################################################### DFS Iterative ############################################# 
+
+class Solution(object):
+    def maxDepth(self, root):
+        if not root:
+            return 0
+
+        stack = [(root, 1)]
+        max_depth = 0
+        while stack:
+            node, depth = stack.pop()
+           
+            if node.left is None and node.right is None:
+                max_depth = max(depth, max_depth)
+            if node.left:
+                stack.append((node.left, depth + 1))
+            if node.right:
+                stack.append((node.right, depth + 1))
+        return max_depth
