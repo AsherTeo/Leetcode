@@ -1,0 +1,27 @@
+class Solution(object):
+    def sumRootToLeaf(self, root):
+        def binary2int(binary_number):
+            power = 0
+            sum_binary = 0
+            while binary_number:
+                value = binary_number.pop()
+                value_number = value * (2**power)
+                sum_binary += value_number
+                power+=1
+            return sum_binary
+        
+        def dfs(node, res, ans):
+            if node is None:
+                return 
+            res.append(node.val)
+            if node.left is None and node.right is None:
+                ans.append(list(res))
+            
+            dfs(node.left, res, ans)
+            dfs(node.right, res,ans)
+            res.pop()
+            return ans
+
+        all_paths = []
+        ans = dfs(root, [], all_paths)
+        return sum(binary2int(ans[i]) for i in range(len(ans)))
