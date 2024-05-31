@@ -1,0 +1,23 @@
+class Solution(object):
+    def sumEvenGrandparent(self, root):
+        def dfs(node):
+            if not node:
+                return 0
+            cur_sum = 0
+
+            if node.left and node.left.left and node.val % 2 == 0:
+                cur_sum += node.left.left.val
+
+            if node.left and node.left.right and node.val % 2 == 0:
+                cur_sum += node.left.right.val
+
+            if node.right and node.right.left and node.val % 2 == 0:
+                cur_sum += node.right.left.val
+
+            if node.right and node.right.right and node.val % 2 == 0:
+                cur_sum += node.right.right.val
+
+            cur_sum += dfs(node.left)
+            cur_sum += dfs(node.right)
+            return cur_sum
+        return dfs(root)
