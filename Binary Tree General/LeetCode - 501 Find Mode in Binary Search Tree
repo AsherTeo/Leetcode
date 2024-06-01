@@ -1,0 +1,18 @@
+######################################################## DFS Recursive collection dictionary ##################################################
+
+from collections import Counter
+
+class Solution(object):
+    def findMode(self, root):
+        def in_order_dfs(node, res):
+            if node is None:
+                return None
+            res.append(node.val)
+            in_order_dfs(node.left, res)
+            in_order_dfs(node.right, res)
+            return res
+        lst = in_order_dfs(root, [])
+        counter = Counter(lst)
+        max_count = max(counter.values())
+        mode = [k for k,v in counter.items() if v == max_count]
+        return mode
