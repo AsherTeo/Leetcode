@@ -30,3 +30,24 @@ class Solution(object):
             if node.right:
                 stack.append((node.right, depth + 1))
         return max_depth
+
+################################################################# DFS Dictionary ############################################
+
+class Solution:
+    def maxDepth(self, root):
+        def dfs(node, depth, depth_dict):
+            if node is None:
+                return 0
+            
+            if node.val not in depth_dict or depth > depth_dict[node.val]:
+                depth_dict[node.val] = depth
+            dfs(node.left, depth + 1, depth_dict)
+            dfs(node.right, depth + 1, depth_dict)
+
+            return depth_dict
+
+        if root is None:
+            return 0
+            
+        depth_dict = {}
+        return max(dfs(root, 1, depth_dict).values())
