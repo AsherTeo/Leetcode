@@ -1,3 +1,20 @@
+############################################################### DFS Recursive #######################################################
+
+class Solution(object):
+    def isUnivalTree(self, root):
+        def dfs(node, target):
+            if node is None:
+                return True
+            
+            if node.val != target:
+                return False
+
+            left = dfs(node.left, target)
+            right = dfs(node.right, target)
+
+            return left and right
+        return dfs(root, root.val)
+
 ########################################################################### BFS #######################################################
 
 class Solution(object):
@@ -18,3 +35,5 @@ class Solution(object):
                 queue.append(node.right)
         
         return True
+
+
