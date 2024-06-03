@@ -12,10 +12,10 @@ Hi! Welcome to my LeetCode repository. This repository is for my personal refere
                /   \
               2     3
 
-Step 1: Append root to deque() => queue = [(TreeNode(val: 1))], res = []
-Step 2: Using while loop, pop first value and append its children queue = [(TreeNode(val: 2), (TreeNode(val: 3))], res = [1]
-Step 3: Pop 2 and append its children, since 2 has no children it will stop at 2. queue = [((TreeNode(val: 3))], res = [1,2]
-Step 3: Pop 3 and append its children, since 3 has no children it will stop at 3. queue = [], res = [1,2,3]
+Step 1: Append root to deque() => queue = [(TreeNode(val: 1))], res = [] \
+Step 2: Using while loop, pop first value and append its children queue = [(TreeNode(val: 2), (TreeNode(val: 3))], res = [1] \
+Step 3: Pop 2 and append its children, since 2 has no children it will stop at 2. queue = [((TreeNode(val: 3))], res = [1,2] \
+Step 3: Pop 3 and append its children, since 3 has no children it will stop at 3. queue = [], res = [1,2,3] \
 Step 4: Since queue is empty it will stop while looping. 
 #### Depth First Search
 
