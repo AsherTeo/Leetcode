@@ -1,0 +1,19 @@
+############################################################### DFS Recusrive ##############################################
+
+class Solution(object):
+    def binaryTreePaths(self, root):
+        def dfs(node, path, res):
+            if node is None:
+                return
+
+            if node.left or node.right:
+                path  = path + str(node.val) + '->' 
+
+            if node.left is None and node.right is None:
+                path  = path + str(node.val)
+                res.append(path)
+            left = dfs(node.left, path, res)
+            right = dfs(node.right, path, res)
+
+            return res
+        return dfs(root, '', []) 
