@@ -1,4 +1,16 @@
-##################################### DFS Approach (Pre Order) #################################
+##################################### DFS Approach Recursive #################################
+
+class Solution(object):
+    def isSameTree(self, p, q):
+        if p is None and q is None:
+            return True
+        if p is None or q is None:
+            return False
+        if p.val != q.val:
+            return False
+        return self.isSameTree(p.left, q.left) and self.isSameTree(p.right, q.right)
+
+##################################### DFS Approach Pre Order #################################
 
 class Solution(object):
     def isSameTree(self, p, q):
@@ -12,6 +24,7 @@ class Solution(object):
             element.extend(dfs(root.right))
             return element
         return (dfs(p) == dfs(q))
+
 ################################### BFS Approach #####################################
 
 class Solution(object):
