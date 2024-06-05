@@ -1,3 +1,20 @@
+########################################### DFS Recursive #######################################################
+
+class Solution(object):
+    def hasPathSum(self, root, targetSum):
+        def dfs(node, cur_sum):
+            if node is None:
+                return False
+
+            cur_sum += node.val
+            if node.left is None and node.right is None and cur_sum == targetSum:
+                return True
+            left = dfs(node.left, cur_sum)
+            right = dfs(node.right, cur_sum)
+
+            return left or right
+        return dfs(root, 0)
+
 ########################################### DFS Iterative #######################################################
 
 class Solution(object):
