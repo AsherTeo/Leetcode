@@ -1,0 +1,17 @@
+
+########################################## DFS Recursive ######################
+
+class Solution(object):
+    def goodNodes(self, root):
+        self.count = 0
+        def dfs(node, target):
+            if node is None:
+                return 0
+            target = max(target, node.val)
+            if node.val >= target:
+                self.count += 1
+
+            left = dfs(node.left, target)
+            right = dfs(node.right,target)
+        dfs(root, root.val)
+        return self.count
