@@ -1,4 +1,4 @@
-############################################################### DFS Recusrive ##############################################
+############################################################### DFS Recursive ##############################################
 
 class Solution(object):
     def binaryTreePaths(self, root):
@@ -17,3 +17,24 @@ class Solution(object):
 
             return res
         return dfs(root, '', []) 
+
+############################################################### DFS Recursive using global variable ##############################################
+
+class Solution(object):
+    def binaryTreePaths(self, root):
+        self.res = []
+        def dfs(node, path):
+            if node is None:
+                return
+
+            if node.left or node.right:
+                path  = path + str(node.val) + '->' 
+
+            if node.left is None and node.right is None:
+                path  = path + str(node.val)
+                self.res.append(path)
+            left = dfs(node.left, path)
+            right = dfs(node.right, path)
+
+        dfs(root, '') 
+        return self.res
