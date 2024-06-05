@@ -1,0 +1,16 @@
+########################################################## DFS Recursive ######################################### 
+
+class Solution(object):
+    def findSecondMinimumValue(self, root):
+        def dfs(node, res):
+            if node is None:
+                return -1
+            res.append(node.val)
+            left = dfs(node.left, res)
+            right = dfs(node.right, res)
+            return res
+        ans = dfs(root, [])
+        ans_set = set(ans)
+        if len(ans_set) < 2:
+            return -1
+        return list(sorted(ans_set))[1]
