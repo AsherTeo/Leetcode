@@ -1,4 +1,18 @@
-############################################################################## DFS ####################################################
+############################################################################## DFS Recursive ####################################################
+
+class Solution(object):
+    def leafSimilar(self, root1, root2):
+        def dfs(node, res):
+            if node is None:
+                return True
+            if node.left is None and node.right is None:
+                res.append(node.val)
+            left = dfs(node.left, res)
+            right = dfs(node.right, res)
+            return res
+        return dfs(root1, []) == dfs(root2, [])
+
+############################################################################## DFS Iterative ####################################################
 
 class Solution(object):
     def leafSimilar(self, root1, root2):
