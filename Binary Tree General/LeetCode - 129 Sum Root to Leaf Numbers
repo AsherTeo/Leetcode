@@ -1,3 +1,21 @@
+################################################# DFS Recursive Method 1 ############################################## 
+
+class Solution(object):
+    def sumNumbers(self, root):
+        def dfs(root, cur_sum):
+            res = []
+            if root is None:
+                return 0
+
+            cur_sum = cur_sum * 10 + root.val
+            
+            if root.left is None and root.right is None:
+                return cur_sum
+
+            return dfs(root.left, cur_sum) + dfs(root.right, cur_sum)
+
+        return dfs(root, 0)
+
 ################################################# DFS Iterative Method 1 ##############################################
 
 class Solution(object):
@@ -41,20 +59,4 @@ class Solution(object):
                 stack.append((node.right, path * 10 + node.right.val))
         return sum(res)
 
-################################################# DFS Recursive Method 1 ############################################## 
 
-class Solution(object):
-    def sumNumbers(self, root):
-        def dfs(root, cur_sum):
-            res = []
-            if root is None:
-                return 0
-
-            cur_sum = cur_sum * 10 + root.val
-            
-            if root.left is None and root.right is None:
-                return cur_sum
-
-            return dfs(root.left, cur_sum) + dfs(root.right, cur_sum)
-
-        return dfs(root, 0)
