@@ -1,0 +1,19 @@
+class Solution(object):
+    def kthLargestLevelSum(self, root, k):
+        queue = deque()
+        queue.append(root)
+        res = []
+        while queue:
+            curr = []
+            for i in range (len(queue)):
+                node = queue.popleft()
+                curr.append(node.val)
+                if node.left:
+                    queue.append(node.left)
+                if node.right:
+                    queue.append(node.right)
+                sum_curr = sum(curr)
+            res.append(sum_curr)
+        if len(res) < k:
+            return -1
+        return sorted(res)[-k]
