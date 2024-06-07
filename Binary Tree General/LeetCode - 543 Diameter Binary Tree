@@ -1,0 +1,15 @@
+########################################################################## DFS #############################################
+class Solution(object):
+    def diameterOfBinaryTree(self, root):
+        self.diameter = 0
+        def dfs(node):
+            if node is None:
+                return 0
+            
+            left = dfs(node.left)
+            right = dfs(node.right)
+            sum_diameter = left + right
+            self.diameter = max(self.diameter, sum_diameter)
+            return 1 + max(left, right)
+        dfs(root)
+        return self.diameter
