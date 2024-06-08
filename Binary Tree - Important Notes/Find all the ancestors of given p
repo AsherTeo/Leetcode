@@ -1,0 +1,27 @@
+Find all the ancestors of given p. root = [3,5,1,6,2,0,8,null,null,7,4] p = 2. Find all the ancestors of p in a list. Ans = [1,5,2]
+        3
+       / \
+      5   1
+     / \ / \
+    6  2 0  8
+      / \
+     7   4
+
+
+class Solution(object):
+    def FindallAncestor(self, root, p):
+        def dfs(node, target, res):
+            if node is None:
+                return None
+            res.append(node.val)
+            if node.val == target.val:
+                return True
+            left = dfs(node.left, target, res)
+            right = dfs(node.right, target, res)
+            if left or right:
+                return True
+            res.pop()
+            return False
+        ans= []
+        dfs(root, p, ans)
+        print(ans)
