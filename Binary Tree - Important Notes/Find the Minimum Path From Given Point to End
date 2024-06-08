@@ -22,14 +22,14 @@ class Solution(object):
                 return node
             return left or right
 
-        def find_path(node, ancestor, res):
+        def find_path(node, target, res):
             if node is None:
                 return None
             res.append(node.val)
-            if node.val == ancestor:
+            if node.val == target:
                 return True
-            left = find_path(node.left,  ancestor, res)
-            right = find_path(node.right,  ancestor, res)
+            left = find_path(node.left,  target, res)
+            right = find_path(node.right,  target, res)
             if left or right:
                 return True
             res.pop()
