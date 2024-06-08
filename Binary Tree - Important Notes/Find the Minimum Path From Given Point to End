@@ -10,7 +10,7 @@ Step 2: Find the path from Start to LCA and LCA to End
 Step 3: Merge both the list together.
 
 class Solution(object):
-    def getDirections(self, root, startValue, destValue):
+    def getPath(self, root, startValue, destValue):
         def findancestor(node, p, q):
             if node is None:
                 return None
