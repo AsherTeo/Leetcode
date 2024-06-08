@@ -1,0 +1,45 @@
+Given this root = [5,1,2,3,null,6,4], startValue = 3, destValue = 6. Find the shortest path from Point 3 to 6 which is [3,1,5,2,6]
+    5
+   / \
+  1   2
+ /   / \
+3    6  4
+
+Step 1: Find the Lowest Common Ancestor (LCA)
+Step 2: Find the path from Start to LCA and LCA to End
+Step 3: Merge both the list together.
+
+class Solution(object):
+    def getDirections(self, root, startValue, destValue):
+        def findancestor(node, p, q):
+            if node is None:
+                return None
+            if node.val == p or node.val == q:
+                return node
+            left = findancestor(node.left, p, q)
+            right = findancestor(node.right, p, q)
+            if left and right:
+                return node
+            return left or right
+
+        def find_path(node, ancestor, res):
+            if node is None:
+                return None
+            res.append(node.val)
+            if node.val == ancestor:
+                return True
+            left = find_path(node.left,  ancestor, res)
+            right = find_path(node.right,  ancestor, res)
+            if left or right:
+                return True
+            res.pop()
+            return False
+    
+        ancestor = findancestor(root, startValue, destValue) # ancestor = 5
+        path_to_start = []
+        path_to_end = []
+        find_path(ancestor, startValue, path_to_start) # [5,1,3]
+        find_path(ancestor, destValue, path_to_end) # [5,2,6]
+        full_path = path_to_start[::-1] + path_to_end[1:] # [3,1,5,2,6]
+
+        print(full_path)
