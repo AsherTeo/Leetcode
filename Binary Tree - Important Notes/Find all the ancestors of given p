@@ -1,4 +1,5 @@
 Find all the ancestors of given p. root = [3,5,1,6,2,0,8,null,null,7,4] p = 2. Find all the ancestors of p in a list. Ans = [1,5,2]
+
         3
        / \
       5   1
