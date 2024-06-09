@@ -1,0 +1,30 @@
+###################################################### DFS Recursive Method 1 #####################################################
+class Solution(object):
+    def sumOfLeftLeaves(self, root):
+        self.res = 0
+        def dfs(node, left_leaves):
+            if node is None:
+                return 0
+            if node.left is None and node.right is None and left_leaves == True:
+                self.res += node.val
+            return dfs(node.left, True) + dfs(node.right, False)
+        dfs(root, False)
+        return self.res
+
+###################################################### DFS Recursive Method 2 #####################################################
+
+class Solution(object):
+    def sumOfLeftLeaves(self, root):
+        def dfs(node, res, left_leaves):
+            cur_sum = 0
+            if node is None:
+                return 0
+            if node.left is None and node.right is None:
+                if left_leaves == True:
+                    res.append(node.val)
+            left = dfs(node.left, res, True)
+            right = dfs(node.right, res,False)
+            return left + right
+        res = []
+        dfs(root, res, False)
+        return sum(res)
