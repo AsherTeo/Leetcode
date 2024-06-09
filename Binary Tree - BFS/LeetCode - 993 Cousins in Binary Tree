@@ -1,0 +1,17 @@
+class Solution(object):
+    def isCousins(self, root, x, y):
+        queue = deque([(root, 0, None)])
+        res = []
+        while queue:
+            for i in range(len(queue)):
+                node, level, parent = queue.popleft()
+                if node.val == x or node.val == y:
+                    res.append((node.val, level, parent))
+                if node.left:
+                    queue.append((node.left, level + 1, node.val))
+                if node.right:
+                    queue.append((node.right, level + 1, node.val))
+
+        if len(res) == 2:
+            return res[0][1] == res[1][1] and res[0][2] != res[1][2]
+        return False
