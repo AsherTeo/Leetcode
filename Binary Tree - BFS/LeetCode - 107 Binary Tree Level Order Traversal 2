@@ -1,3 +1,27 @@
+######################################################## Method 1 #######################################
+
+class Solution(object):
+    def levelOrderBottom(self, root):
+        if root is None:
+            return None
+        queue = deque()
+        queue.append(root)
+        res = []
+        while queue:
+            curr = []
+            n_queue = len(queue)
+            for i in range (n_queue):
+                node = queue.popleft()
+                curr.append(node.val)
+                if node.left:
+                    queue.append(node.left)
+                if node.right:
+                    queue.append(node.right)
+            res.append(curr)
+        return res[::-1]
+
+######################################################## Method 2 #######################################
+
 class Solution(object):
     def levelOrderBottom(self, root):
         if root is None:
