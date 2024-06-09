@@ -1,0 +1,24 @@
+class Solution(object):
+    def zigzagLevelOrder(self, root):
+        if root is None:
+            return None
+
+        queue = deque()
+        queue.append(root)
+        res = []
+        while queue:
+            curr = []
+            for i in range (len(queue)):
+                node = queue.popleft()
+                curr.append(node.val)
+                if node.left:
+                    queue.append(node.left)
+                if node.right:
+                    queue.append(node.right)
+            
+            res.append(curr)
+            
+        for i in range (len(res)):
+            if i % 2 != 0:
+                res[i] = res[i][::-1]
+        return res
