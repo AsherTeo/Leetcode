@@ -1,3 +1,30 @@
+######################################################################### Method 1 ############################################
+
+class Solution(object):
+    def zigzagLevelOrder(self, root):
+        if root is None:
+            return None
+
+        queue = deque([(root, 0)])
+
+        res = []
+        while queue:
+            curr = []
+            for i in range (len(queue)):
+                node, level = queue.popleft()
+                curr.append(node.val)
+                if node.left:
+                    queue.append((node.left, level + 1))
+                if node.right:
+                    queue.append((node.right, level + 1))
+            
+            if level % 2 != 0:
+                curr = curr[::-1]
+            res.append(curr)
+        return res
+                
+######################################################################### Method 2 ############################################
+
 class Solution(object):
     def zigzagLevelOrder(self, root):
         if root is None:
