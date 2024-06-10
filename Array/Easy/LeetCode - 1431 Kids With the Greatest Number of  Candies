@@ -1,0 +1,10 @@
+class Solution(object):
+    def kidsWithCandies(self, candies, extraCandies):
+        res = []
+        max_candy = max(candies)
+        for index in range(len(candies)):
+            if candies[index] + extraCandies < max_candy:
+                res.append(False)
+            else:
+                res.append(True)
+        return res
