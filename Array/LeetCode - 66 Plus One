@@ -1,0 +1,9 @@
+class Solution(object):
+    def plusOne(self, digits):
+        string = ''
+        for num in digits:
+            string += str(num)
+
+        new_str = str(int(string) + 1)
+
+        return [int(strings) for strings in new_str]
