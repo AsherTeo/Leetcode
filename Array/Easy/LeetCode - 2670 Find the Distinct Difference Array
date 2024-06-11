@@ -1,0 +1,10 @@
+import numpy as np
+class Solution(object):
+    def distinctDifferenceArray(self, nums):
+        res = []
+        for index in range(1, len(nums) + 1):
+            prefix = nums[0:index]
+            suffix = nums[index: len(nums)]
+            sub = (len(np.unique(prefix)) - len((np.unique(suffix))))
+            res.append(sub)
+        return res
