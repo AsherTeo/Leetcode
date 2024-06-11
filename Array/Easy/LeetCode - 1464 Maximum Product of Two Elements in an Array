@@ -1,0 +1,18 @@
+######################################################## Sorting ##############################################
+
+class Solution(object):
+    def maxProduct(self, nums):
+        sorted_nums = sorted(nums, reverse = True)
+        return (sorted_nums[0] - 1) * (sorted_nums[1] - 1)
+
+######################################################## Brute Force ##############################################
+
+class Solution(object):
+    def maxProduct(self, nums):
+        max_value = 0
+        for i in range(len(nums)):
+            for j in range(len(nums)):
+                if i != j:
+                    product = (nums[i] - 1) * (nums[j] - 1)
+                    max_value = max(max_value, product)
+        return max_value
