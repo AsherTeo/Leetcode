@@ -1,0 +1,9 @@
+class Solution(object):
+    def differenceOfSum(self, nums):
+        
+        element_sum = sum(nums)
+        strings = [str(string) for string in nums]
+        strings_res = [int(s) for string in strings for s in string]
+        digit_sum = sum(strings_res)
+
+        return abs(element_sum - digit_sum)
