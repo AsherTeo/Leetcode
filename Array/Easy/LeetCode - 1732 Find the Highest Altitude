@@ -1,0 +1,7 @@
+class Solution(object):
+    def largestAltitude(self, gain):
+        gain.insert(0,0)
+        new_gain = [0] * len(gain)
+        for index in range(len(gain) -1):
+            new_gain[index + 1] = new_gain[index] + gain[index + 1]
+        return max(new_gain)
