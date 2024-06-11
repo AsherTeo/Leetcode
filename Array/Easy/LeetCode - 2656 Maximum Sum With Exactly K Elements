@@ -1,0 +1,8 @@
+class Solution(object):
+    def maximizeSum(self, nums, k):
+        sorted_num = sorted(nums)
+        curr_sum = 0
+        for i in range(k):
+            curr_sum += sorted_num[-1]
+            sorted_num[-1] += 1
+        return curr_sum
