@@ -1,0 +1,25 @@
+########################################################## Two Pointers ###################################
+
+class Solution(object):
+    def shuffle(self, nums, n):
+        L = 0
+        R = n
+        res = []
+        while L < n:
+            res.append(nums[L])
+            res.append(nums[R])
+            L +=1
+            R +=1
+        return res
+
+########################################################## zip ###################################
+
+class Solution(object):
+    def shuffle(self, nums, n):
+        x = nums[:n]
+        y = nums[n:]
+        res = []
+        for index, elements in enumerate (zip(x,y)):
+            res.append(elements[0])
+            res.append(elements[1])
+        return res
