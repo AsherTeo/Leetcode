@@ -1,0 +1,7 @@
+class Solution(object):
+    def findWordsContaining(self, words, x):
+        res = []
+        for index, string in enumerate(words):
+            if x in string:
+               res.append(index)
+        return res 
