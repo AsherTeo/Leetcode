@@ -1,0 +1,12 @@
+class Solution(object):
+    def findSpecialInteger(self, arr):
+        hash_map = {}
+
+        for num in arr:
+            if num in hash_map:
+                hash_map[num] += 1
+            else:
+                hash_map[num] = 1
+
+        total_len = len(arr)
+        return [k for k, v in hash_map.items() if float(v)/total_len > 0.25][0]
