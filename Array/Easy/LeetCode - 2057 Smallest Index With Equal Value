@@ -1,0 +1,9 @@
+class Solution(object):
+    def smallestEqual(self, nums):
+        min_value = float('inf')
+
+        for index in range(len(nums)):
+            if index % 10 == nums[index]:
+                min_value = min(min_value, index)
+                return min_value
+        return -1
