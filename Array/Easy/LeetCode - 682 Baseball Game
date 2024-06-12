@@ -1,0 +1,18 @@
+class Solution(object):
+    def calPoints(self, operations):
+        res = []
+        for index in range (len(operations)):
+            if operations[index] == "+":
+                res.append(res[-1] + res[-2])
+
+            elif operations[index] == "D":
+                res.append(res[-1] * 2)
+
+            elif operations[index] == "C":
+                res.pop()
+
+            else:
+                string = int(operations[index])
+                res.append(string)
+        
+        return sum(res)
