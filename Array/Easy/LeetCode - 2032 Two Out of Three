@@ -1,0 +1,12 @@
+class Solution(object):
+    def twoOutOfThree(self, nums1, nums2, nums3):
+        hash_map = {}
+        total_num = list(set(nums1)) + list(set(nums2)) + list(set(nums3))
+
+        for num in total_num:
+            if num in hash_map:
+                hash_map[num] += 1
+            else:
+                hash_map[num] = 1
+
+        return [k for k, v in hash_map.items() if v > 1]
