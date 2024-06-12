@@ -1,0 +1,6 @@
+class Solution(object):
+    def buyChoco(self, prices, money):
+        sorted_prices = sorted(prices)
+        if sorted_prices[0] + sorted_prices[1] <= money:
+            return money - (sorted_prices[0] + sorted_prices[1])
+        return money
