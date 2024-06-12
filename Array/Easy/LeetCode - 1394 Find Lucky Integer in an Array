@@ -1,0 +1,16 @@
+class Solution(object):
+    def findLucky(self, arr):
+        hash_map = {}
+        res = []
+        max_value = -1
+        for num in arr:
+            if num in hash_map:
+                hash_map[num] += 1
+            else:
+                hash_map[num] = 1
+        for k,v in hash_map.items():
+            if v == k:
+                if k > max_value:
+                    max_value = k
+
+        return max_value
