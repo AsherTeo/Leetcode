@@ -1,0 +1,30 @@
+class Solution(object):
+    def maximumValue(self, strs):
+        int_res = []
+        str_res = []
+        max_value = float('-inf')
+        for string in strs:
+            try:
+                integer = int(string)
+                int_res.append(integer)
+            except:
+                str_res.append(string)
+
+        if int_res and str_res:
+            max_value = max(max_value, max(int_res))
+            for string in str_res:
+                max_value = max(max_value, len(string))
+            for string in str_res:
+                max_value = max(max_value, len(string))
+            return max_value
+
+        elif int_res:
+            max_value = max(max_value, max(int_res))
+            return max_value
+
+        elif str_res:
+            for string in str_res:
+                max_value = max(max_value, len(string))
+            return max_value
+
+        
