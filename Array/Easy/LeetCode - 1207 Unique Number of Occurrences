@@ -1,0 +1,15 @@
+############################################################## Hash Map ##################################################
+
+class Solution(object):
+    def uniqueOccurrences(self, arr):
+        hash_map = {}
+
+        for num in arr:
+            if num in hash_map:
+                hash_map[num] += 1
+            else:
+                hash_map[num] = 1
+
+        values = list(hash_map.values())
+        unique = set(values)
+        return len(values) == len(unique)
