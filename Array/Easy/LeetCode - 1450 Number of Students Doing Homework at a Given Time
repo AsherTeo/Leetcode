@@ -1,0 +1,7 @@
+class Solution(object):
+    def busyStudent(self, startTime, endTime, queryTime):
+        count = 0
+        for elements in (zip(startTime, endTime)):
+            if elements[0] <= queryTime <= elements[1]:
+                count += 1
+        return count
