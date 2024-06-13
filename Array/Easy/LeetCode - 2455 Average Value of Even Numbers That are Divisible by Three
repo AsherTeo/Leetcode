@@ -1,0 +1,12 @@
+class Solution(object):
+
+    def averageValue(self, nums):
+        count = 0
+        sum_value = 0
+        for num in nums:
+            if num % 2 == 0 and num % 3 == 0:
+                count += 1
+                sum_value += num
+        if count == 0:
+            return sum_value
+        return sum_value / count
