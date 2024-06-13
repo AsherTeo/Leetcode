@@ -1,0 +1,10 @@
+class Solution(object):
+    def maximumProduct(self, nums):
+        sorted_nums = sorted(nums)
+        if sorted_nums[0] * sorted_nums[1] > sorted_nums[-1] * sorted_nums[-2]:
+            max_values = sorted_nums[0] * sorted_nums[1] * sorted_nums[-1]
+            max_values = max(max_values, sorted_nums[-1] * sorted_nums[-2] * sorted_nums[-3])
+        else:
+            max_values = sorted_nums[-1] * sorted_nums[-2] * sorted_nums[-3]
+            max_values = max(max_values, sorted_nums[0] * sorted_nums[1] * sorted_nums[-1])
+        return max_values
