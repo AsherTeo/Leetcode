@@ -1,0 +1,15 @@
+class Solution(object):
+    def mostFrequentEven(self, nums):
+        hash_map = {}
+        frequency = -1
+        for num in nums:
+            if num % 2 == 0:
+                if num in hash_map:
+                    hash_map[num] += 1
+                else:
+                    hash_map[num] = 1
+
+        if not hash_map:
+            return -1
+        max_v = max(hash_map.values())
+        return min([k for k, v in hash_map.items() if v == max_v])
