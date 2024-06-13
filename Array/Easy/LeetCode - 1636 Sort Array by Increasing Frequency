@@ -1,0 +1,16 @@
+class Solution(object):
+    def frequencySort(self, nums):
+        hash_map = {}
+        res = []
+        for num in nums:
+            if num in hash_map:
+                hash_map[num] += 1
+            else:
+                hash_map[num] = 1
+        
+        sorted_map = sorted(hash_map.items(), key=lambda x: (x[1], -x[0]))
+        
+        for i in sorted_map:
+            val = [i[0]] * i[1]
+            res.extend(val)
+        return res
