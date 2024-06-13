@@ -1,0 +1,11 @@
+import numpy as np
+
+class Solution(object):
+    def dominantIndex(self, nums):
+        max_value = max(nums)
+        max_index = np.argmax(nums)
+        nums.remove(max_value)
+        for index in range(len(nums)):
+            if nums[index] * 2 > max_value:
+                return -1
+        return max_index
