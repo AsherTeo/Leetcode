@@ -1,0 +1,7 @@
+class Solution(object):
+    def minimumCost(self, cost):
+        total_cost= sum(cost)
+        sorted_cost = sorted(cost, reverse = True)
+        for index in range(2, len(sorted_cost), 3):
+            total_cost -= sorted_cost[index]
+        return total_cost  
