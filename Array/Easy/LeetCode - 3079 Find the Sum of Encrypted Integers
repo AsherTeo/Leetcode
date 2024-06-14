@@ -1,0 +1,9 @@
+class Solution(object):
+    def sumOfEncryptedInt(self, nums):
+        total_sum = 0
+        for num in nums:
+            max_digit = max(str(num))
+            concat_str = [max_digit] * len(str(num))
+            concat_int = int(''.join(concat_str))
+            total_sum += concat_int
+        return total_sum
