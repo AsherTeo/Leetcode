@@ -1,0 +1,6 @@
+class Solution(object):
+    def nextGreatestLetter(self, letters, target):
+        for s in letters:
+            if ord(s) > ord(target):
+                return s
+        return letters[0]
