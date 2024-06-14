@@ -1,3 +1,17 @@
+#################################################### Better ##############################
+
+class Solution(object):
+    def findErrorNums(self, nums):
+        hash_map = Counter(nums)
+        for k, v in hash_map.items():
+            if v == 2:
+                first_num = k
+        n = len(nums)
+        sum_of_n = (n * (n+1))//2
+        sum_of_nums = sum(nums) - first_num
+        missing_no = sum_of_n - sum_of_nums
+        return [first_num, missing_no]
+
 ################################################ Too slow #########################
 
 class Solution(object):
