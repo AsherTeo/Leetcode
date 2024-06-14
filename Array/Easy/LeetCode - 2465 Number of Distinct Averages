@@ -1,0 +1,14 @@
+class Solution(object):
+    def distinctAverages(self, nums):
+        res = []
+        
+        while nums:
+            min_number = min(nums)
+            max_number = max(nums)
+            
+            ave = float(min_number + max_number)/ 2
+            res.append(ave)
+            nums.remove(min_number)
+            nums.remove(max_number)
+        
+        return len(set(res))
