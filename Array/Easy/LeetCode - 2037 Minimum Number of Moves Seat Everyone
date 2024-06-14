@@ -1,0 +1,10 @@
+class Solution(object):
+    def minMovesToSeat(self, seats, students):
+        res = 0
+
+        sorted_seat = sorted(seats)
+        sorted_student = sorted(students)
+
+        for seat, student in (zip(sorted_seat, sorted_student)):
+            res += abs(student - seat)
+        return res
