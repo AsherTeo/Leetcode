@@ -1,0 +1,8 @@
+class Solution(object):
+    def isPossibleToSplit(self, nums):
+        hash_map = Counter(nums)
+
+        for k, v in hash_map.items():
+            if v > 2:
+                return False
+        return True
