@@ -1,0 +1,7 @@
+class Solution(object):
+    def createTargetArray(self, nums, index):
+        arr = []
+
+        for elements in (zip(nums,index)):
+            arr.insert(elements[1], elements[0])
+        return arr
