@@ -1,0 +1,32 @@
+########################################################################### Better #####################################
+
+class Solution(object):
+    def numberGame(self, nums):
+        sorted_nums = sorted(nums)
+
+        for index in range(0, len(sorted_nums), 2):
+            sorted_nums[index], sorted_nums[index + 1] = sorted_nums[index + 1], sorted_nums[index]
+
+        return sorted_nums
+
+########################################################################### Not Ideal #####################################
+
+class Solution(object):
+    def numberGame(self, nums):
+        alice = []
+        bob = []
+        res = []
+
+        for index in range(len(nums)):
+            min_value = min(nums)
+            if index % 2 == 0:
+                alice.append(min_value)
+                nums.remove(min_value)
+            else:
+                bob.append(min_value)
+                nums.remove(min_value)
+        
+        for numbers in zip(bob, alice):
+            res.append(numbers[0])
+            res.append(numbers[1])
+        return res
