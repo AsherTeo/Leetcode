@@ -2,6 +2,17 @@
 
 Hi! Welcome to my LeetCode repository. This repository is for my personal reference, where I'll be solving LeetCode problems, identifying patterns, and providing explanations. 
 
+## Sorting
+#### Bubble Sort
+
+class Solution(object):
+    def sortArray(self, nums): # Selection sort
+        for i in range(len(nums)):
+            for j in range(i + 1, len(nums)):
+                if nums[i] > nums[j]:
+                    nums[i], nums[j] = nums[j], nums[i]
+        return nums
+
 ## Binary Tree
 #### Breadth First Search
 
