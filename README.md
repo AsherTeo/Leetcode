@@ -5,6 +5,7 @@ Hi! Welcome to my LeetCode repository. This repository is for my personal refere
 ## Sorting
 #### Bubble Sort
 
+```python
 class Solution(object):
     def sortArray(self, nums): # Selection sort
         for i in range(len(nums)):
