@@ -6,13 +6,8 @@ Hi! Welcome to my LeetCode repository. This repository is for my personal refere
 #### Bubble Sort
 
 ```python
-class Solution(object):
-    def sortArray(self, nums): # Selection sort
-        for i in range(len(nums)):
-            for j in range(i + 1, len(nums)):
-                if nums[i] > nums[j]:
-                    nums[i], nums[j] = nums[j], nums[i]
-        return nums
+
+
 ```
 
 ## Binary Tree
