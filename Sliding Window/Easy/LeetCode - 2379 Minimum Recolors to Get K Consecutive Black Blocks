@@ -1,0 +1,36 @@
+######################################################### O N  ###############################################
+
+class Solution(object):
+    def minimumRecolors(self, blocks, k):
+        L = 0
+        count = 0
+        min_count = float('inf')
+
+        for R in range(len(blocks)):
+            if blocks[R] == 'W':
+                count += 1
+            if R - L + 1 > k:
+                if blocks[L] == 'W':
+                    count -= 1
+                L +=1
+            if R-L + 1 == k:
+                min_count = min(min_count, count)
+        return min_count
+
+######################################################### O N^2 Not good ###############################################
+
+class Solution(object):
+    def minimumRecolors(self, blocks, k):
+        L = 0
+        count = 0
+        min_count = float('inf')
+        for i in range(len(blocks) - k + 1):
+            window = blocks[i: i+k]
+            for s in window:
+                if s == 'W':
+                    count +=1
+      
+            min_count = min(min_count, count)
+            count = 0
+            L += 1
+        return min_count
