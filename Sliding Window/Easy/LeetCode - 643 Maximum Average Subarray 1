@@ -1,0 +1,16 @@
+class Solution(object):
+    def findMaxAverage(self, nums, k):
+        # larger average = larger sum
+
+        current_sum = sum(nums[:k])
+        max_val = current_sum
+
+        if len(nums) == k:
+            return float(current_sum)/k
+        else:
+            for i in range(k, len(nums)):
+                
+                current_sum = current_sum - nums[i - k] + nums[i]
+                max_val = max(max_val, current_sum)
+               
+            return float(max_val) / k 
