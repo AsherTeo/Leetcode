@@ -1,0 +1,8 @@
+class Solution(object):
+    def minimumDifference(self, nums, k):
+        sorted_nums = sorted(nums)
+        min_val = float('inf')
+        for i in range(len(sorted_nums) - k + 1):
+            subarr = sorted_nums[i: i + k]
+            min_val = min(min_val, subarr[-1] - subarr[0])
+        return min_val
