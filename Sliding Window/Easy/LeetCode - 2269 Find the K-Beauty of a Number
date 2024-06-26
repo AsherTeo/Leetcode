@@ -1,0 +1,10 @@
+class Solution(object):
+    def divisorSubstrings(self, num, k):
+        string = str(num)
+        count = 0
+        for i in range(len(string) - k + 1):
+            subarr = string[i: i + k]
+            int_subarr = int(''.join(subarr))
+            if int_subarr!= 0 and num % int_subarr == 0:
+                count += 1
+        return count
