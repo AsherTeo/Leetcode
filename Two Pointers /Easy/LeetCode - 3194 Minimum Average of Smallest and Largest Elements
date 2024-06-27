@@ -1,0 +1,15 @@
+class Solution(object):
+    def minimumAverage(self, nums):
+        nums = sorted(nums)
+    
+        l = 0
+        r = len(nums) - 1
+        min_val = float('inf')
+        while l < r:
+            ave = float(nums[l] + nums[r])/2
+            min_val = min(min_val, ave)
+
+            l += 1
+            r -= 1
+            
+        return min_val
