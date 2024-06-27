@@ -1,0 +1,17 @@
+class Solution(object):
+    def firstPalindrome(self, words):
+
+        for word in words:
+            l = 0
+            r = len(word) - 1
+            copy = list(word)
+            
+            while l < r:
+
+                copy[l], copy[r] = copy[r], copy[l]
+                
+                l += 1
+                r -= 1
+            if ''.join(copy) == word:
+                return word
+        return ''
