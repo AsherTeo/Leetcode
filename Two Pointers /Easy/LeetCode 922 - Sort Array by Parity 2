@@ -1,0 +1,16 @@
+class Solution(object):
+    def sortArrayByParityII(self, nums):
+
+        odd = [num for num in nums if num%2 != 0]
+        even = [num for num in nums if num%2 == 0]
+
+        i = j =0
+        res = []
+
+        while i < len(odd) and j < len(even):
+            res.append(even[j])
+            res.append(odd[i])
+            i += 1
+            j += 1
+        
+        return res
