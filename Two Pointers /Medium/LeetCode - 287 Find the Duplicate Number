@@ -1,0 +1,11 @@
+class Solution(object):
+    def findDuplicate(self, nums):
+        l = 0
+        r = 1
+        nums = sorted(nums)
+
+        while r < len(nums):
+            if nums[l] == nums[r]:
+                return nums[l]
+            l += 1
+            r += 1
