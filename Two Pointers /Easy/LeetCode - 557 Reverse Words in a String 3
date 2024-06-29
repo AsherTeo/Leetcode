@@ -1,0 +1,15 @@
+class Solution(object):
+    def reverseWords(self, s):
+        s = s.split(' ')
+        res = ''
+        for word in s:
+            l = 0
+            r = len(word) - 1
+            char = list(word)
+            while l < r:
+                char[l], char[r]  =char[r], char[l]
+
+                l +=1
+                r -=1
+            res += ''.join(char) + ' '
+        return res.strip()
