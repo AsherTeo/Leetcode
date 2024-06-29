@@ -1,0 +1,17 @@
+class Solution(object):
+    def applyOperations(self, nums):
+
+
+        for j in range(1,len(nums)):
+            if nums[j] == nums[j - 1]:
+                nums[j - 1] = nums[j - 1] * 2
+                nums[j] = 0
+
+        l = 0
+
+        for r in range(len(nums)):
+            if nums[r] != 0:
+                nums[r], nums[l] = nums[l], nums[r]
+                l +=1
+
+        return nums
