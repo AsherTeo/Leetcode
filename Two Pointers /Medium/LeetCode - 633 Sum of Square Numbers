@@ -1,0 +1,36 @@
+###################################################################  Ideal #########################################
+
+class Solution(object):
+    def judgeSquareSum(self, c):
+
+        l = 0
+        r = int(sqrt(c)) + 1
+       
+        while l <= r:
+            if (l * l) +  (r * r) == c:
+                return True
+
+            elif l * l +  r * r > c:
+                r-=1
+            else:
+                l +=1
+        return False
+
+###################################################################  Not Ideal  Space Complexity is O(N) #########################################
+
+class Solution(object):
+    def judgeSquareSum(self, c):
+
+        l = 0
+        r = int(sqrt(c)) + 1
+        nums = [i for i in range(r+1)]
+       
+        while l <= r:
+            if (nums[l] * nums[l]) +  (nums[r] * nums[r]) == c:
+                return True
+
+            elif nums[l] * nums[l] +  nums[r] * nums[r] > c:
+                r-=1
+            else:
+                l +=1
+        return False
