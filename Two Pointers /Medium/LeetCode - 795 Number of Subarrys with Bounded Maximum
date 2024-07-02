@@ -1,0 +1,28 @@
+class Solution(object):
+    def numSubarrayBoundedMax(self, nums, left, right):
+
+        l = 0
+        r = 0
+        count = 0
+        curr_sum = 0
+        left_sub = False
+
+        while r < len(nums):
+            if left <= nums[r] <= right:
+                curr_sum = r - l + 1
+                count += curr_sum
+                left_sub = True
+
+            elif nums[r] < left:
+                if left_sub:
+                    count += curr_sum
+            else:
+                curr_sum = 0
+                l = r + 1
+                left_sub = False
+            
+            r += 1
+
+        return count
+
+
