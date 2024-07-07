@@ -1,0 +1,28 @@
+class Solution(object):
+    def minimumRefill(self, plants, capacityA, capacityB):
+
+        l = 0
+        r = len(plants) - 1
+        capA = capacityA # To refill when not enough
+        capB = capacityB
+        refill = 0
+
+        while l < r:
+            if capacityA < plants[l]:
+                refill += 1
+                capacityA = capA
+            if capacityB < plants[r]:
+                refill +=1
+                capacityB = capB
+            
+            capacityA -= plants[l]
+            capacityB -= plants[r]
+          
+            l += 1
+            r -= 1
+
+            if l == r:
+                if max(capacityA, capacityB) < plants[l]:
+                    refill += 1
+
+        return refill
