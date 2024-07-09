@@ -1,0 +1,17 @@
+class Solution(object):
+    def getStrongest(self, arr, k):
+        arr.sort()
+
+        l = 0
+        r = len(arr) - 1
+        median = arr[(len(arr) - 1) // 2]
+        res = []
+        while k > 0:
+            if abs(arr[l] - median) > abs(arr[r] - median):
+                res.append(arr[l])
+                l +=1
+            else:
+                res.append(arr[r])
+                r -=1
+            k -=1
+        return res
