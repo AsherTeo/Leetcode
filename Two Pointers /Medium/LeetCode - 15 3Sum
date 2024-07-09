@@ -1,0 +1,21 @@
+class Solution(object):
+    def threeSum(self, nums):
+        nums.sort()
+        seen = set()
+        res = []
+        for i in range(len(nums)):
+            l = i + 1
+            r = len(nums) - 1
+            while l < r:
+                curr_sum = nums[i] + nums[l] + nums[r]
+                tuplets = (nums[i], nums[l] , nums[r])
+                if curr_sum == 0:
+                    if tuplets not in seen:
+                        res.append(tuplets)
+                    seen.add(tuplets)
+                    l+=1
+                elif curr_sum > 0:
+                    r-=1
+                else:
+                    l+=1
+        return res
