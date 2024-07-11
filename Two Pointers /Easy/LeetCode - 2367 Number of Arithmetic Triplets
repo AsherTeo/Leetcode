@@ -1,0 +1,18 @@
+class Solution(object):
+    def arithmeticTriplets(self, nums, diff):
+        nums.sort()
+        count = 0
+        for i in range(len(nums)):
+            l = i+1
+            r = i+2
+            
+            while r < len(nums):
+                if nums[r] - nums[l] == diff:
+                    if nums[l] - nums[i] == diff:
+                        count +=1
+                    r+=1
+                elif nums[r] - nums[l] < diff:
+                    r +=1
+                else:
+                    l+=1
+        return count
