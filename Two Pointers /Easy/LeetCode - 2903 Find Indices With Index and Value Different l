@@ -1,0 +1,17 @@
+class Solution(object):
+    def findIndices(self, nums, indexDifference, valueDifference):
+        res = []
+        i = -1
+        j = -1
+        for l in range(len(nums)):
+            r = l + indexDifference 
+            while r < len(nums):
+                if abs(nums[l] - nums[r]) >= valueDifference:
+                    i = l
+                    j = r
+                    break
+                else:
+                    r+=1
+        res.append(i)
+        res.append(j)
+        return res
