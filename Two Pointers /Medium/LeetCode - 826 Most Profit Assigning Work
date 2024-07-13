@@ -1,0 +1,17 @@
+class Solution(object):
+    def maxProfitAssignment(self, difficulty, profit, worker):
+        worker.sort()
+        zip_file = zip(difficulty, profit)
+        zip_file.sort(key=lambda x:x[1])
+       
+        i = len(worker) - 1
+        j = len(zip_file) - 1
+        max_profit = 0
+
+        while i >= 0 and j >= 0:
+            if worker[i] >= zip_file[j][0]:
+                max_profit += zip_file[j][1]
+                i -=1
+            else:
+                j-=1
+        return max_profit
