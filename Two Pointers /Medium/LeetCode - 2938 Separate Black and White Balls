@@ -1,0 +1,19 @@
+class Solution(object):
+    def minimumSteps(self, s):
+        nums = [int(num) for num in str(s)]
+
+        white = [i for i in range(len(nums)) if nums[i] == 0]
+        black = [i for i in range(len(nums)) if nums[i] == 1]
+
+        b = 0 
+        w = len(white) - 1
+        count = 0
+      
+        while b < len(black) and w >= 0:
+            if white[w] > black[b]:
+                count += (white[w]-black[b])
+                b+=1
+                w-=1
+            else:
+                break
+        return count
