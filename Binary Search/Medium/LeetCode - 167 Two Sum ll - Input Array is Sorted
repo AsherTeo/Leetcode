@@ -1,3 +1,5 @@
+### Time Complexity = O(nlogn)
+
 class Solution(object):
     def twoSum(self, numbers, target):
 
