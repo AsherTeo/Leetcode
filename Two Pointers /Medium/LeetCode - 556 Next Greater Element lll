@@ -1,0 +1,29 @@
+class Solution(object):
+    def nextGreaterElement(self, n):
+        nums = [int(char) for char in str(n)]
+
+        pivot = None
+        for i in range(len(nums)-2, -1,-1):
+            if nums[i] < nums[i + 1]:
+                pivot = i
+                break
+        else:
+            return -1
+        
+        for j in range(len(nums)-1,-1,-1):
+            if nums[j] > nums[pivot]:
+                nums[j], nums[pivot] = nums[pivot], nums[j]
+                break
+        
+        l = pivot + 1
+        r = len(nums) - 1
+
+        while l < r:
+            nums[l], nums[r] = nums[r], nums[l]
+            l += 1
+            r -=1
+        ans = int(''.join([str(char) for char in nums]))
+        
+        if ans > 2**31 - 1:
+            return -1
+        return ans
