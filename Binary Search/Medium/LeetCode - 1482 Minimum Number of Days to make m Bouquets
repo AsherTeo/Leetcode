@@ -1,0 +1,35 @@
+#Time Complexity -  O(N∗Log(Max(Bloomday)))
+
+class Solution(object):
+    def minDays(self, bloomDay, m, k):
+        def function(x,m,k):
+            count = k
+            for num in bloomDay:
+                if m == 0:
+                    return m   
+                if num <= x:
+                    count-=1
+                    if count == 0:
+                        m-=1
+                        count = k                     
+                else:
+                    count = k
+            return m
+            
+        l = min(bloomDay)
+        r = max(bloomDay)
+        min_days = -1
+        min_days_days = float('inf') 
+
+        while l <= r:
+            days = (l + r) // 2
+            remaining = function(days,m,k)
+           
+            if remaining <= 0:
+                min_days = min_days_days
+                min_days = min(days, min_days)
+                r = days - 1
+            else:
+                l = days + 1
+
+        return min_days
