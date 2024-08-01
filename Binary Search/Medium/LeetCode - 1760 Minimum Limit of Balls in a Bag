@@ -1,0 +1,16 @@
+class Solution(object):
+    def minimumSize(self, nums, maxOperations):
+        l = 1
+        r = max(nums)
+        def isValid(mid):
+            total = 0
+            for num in nums:
+                total += (num - 1)//mid
+            return total
+        while l <= r:
+            mid = (l + r)//2
+            if isValid(mid) <= maxOperations:
+                r = mid - 1
+            else:
+                l = mid + 1
+        return l
