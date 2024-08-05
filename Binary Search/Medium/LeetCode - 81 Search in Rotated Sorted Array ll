@@ -1,0 +1,45 @@
+class Solution:
+    def search(self, nums: List[int], target: int) -> bool:
+        for num in nums:
+            if num == target:
+                return True
+        return False
+        n = len(nums) - 1
+        l = 0
+        r = n
+
+        while l < r:
+            mid = (l + r)//2
+            if nums[mid] > nums[r]:
+                l = mid + 1
+            else:
+                r = mid
+        min_val = nums[l]
+        min_index = l     # Find min value first then set the left and right
+       
+        if min_index == 0:
+            if nums[0] == nums[-1]: # [1,1,1,1,1,2,1] O(n) Time complexity
+                for num in nums:
+                    if num == target:
+                        return True
+                return False
+            else:
+                l = 0
+                r = n
+
+        elif target >= nums[0] and target <= nums[min_index - 1]:
+            l = 0
+            r = min_index  - 1
+        else:
+            l = min_index
+            r = n
+        
+        while l <= r:
+            mid = (l + r)//2
+            if nums[mid] == target:
+                return True
+            elif nums[mid] > target:
+                r = mid - 1
+            else:
+                l = mid + 1
+        return False
