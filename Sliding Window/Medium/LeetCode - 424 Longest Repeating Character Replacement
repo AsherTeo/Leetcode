@@ -1,0 +1,35 @@
+################################################################ Not optimzed yet #######################################################
+
+class Solution:
+    def characterReplacement(self, s: str, k: int) -> int:
+        l = 0
+        hash_map = defaultdict(int)
+        s = list(s)
+        max_count = 0
+        for r in range(len(s)):
+            hash_map[s[r]] += 1
+            while r - l + 1 - max(hash_map.values()) > k:
+                hash_map[s[l]] -= 1
+                l += 1
+
+            max_count = max(max_count, r - l + 1)
+        return max_count
+
+################################################################ Optimzed Solution #######################################################
+
+class Solution:
+    def characterReplacement(self, s: str, k: int) -> int:
+        l = 0
+        hash_map = defaultdict(int)
+        s = list(s)
+        max_count = 0
+        maxf = 0
+        for r in range(len(s)):
+            hash_map[s[r]] += 1
+            maxf = max(maxf, hash_map[s[r]])
+            while r - l + 1 - maxf > k:
+                hash_map[s[l]] -= 1
+                l += 1
+
+            max_count = max(max_count, r - l + 1)
+        return max_count
