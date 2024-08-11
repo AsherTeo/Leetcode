@@ -1,0 +1,23 @@
+class Solution:
+    def maximumSubarraySum(self, nums: List[int], k: int) -> int:
+         
+        l = 0
+        hash_map = Counter()
+        max_total = 0
+        total = 0
+        
+        for r in range(len(nums)):
+            total += nums[r]
+            hash_map[nums[r]] += 1
+            
+            if  r - l == k:
+                total -= nums[l]
+                hash_map[nums[l]] -= 1
+                if hash_map[nums[l]] == 0:
+                    del hash_map[nums[l]]
+                l += 1
+
+            if len(hash_map) == k:
+                max_total = max(max_total, total)
+        
+        return max_total
