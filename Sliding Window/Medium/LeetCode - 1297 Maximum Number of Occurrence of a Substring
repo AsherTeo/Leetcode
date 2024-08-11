@@ -1,0 +1,20 @@
+class Solution:
+    def maxFreq(self, s: str, maxLetters: int, minSize: int, maxSize: int) -> int:
+        l = 0 
+
+        hash_map = Counter()
+        count = 0
+        res = []
+        for r in range(len(s)):
+            hash_map[s[r]] += 1
+            if r - l == minSize:
+                hash_map[s[l]] -= 1
+                if hash_map[s[l]] == 0:
+                    del hash_map[s[l]]
+                l += 1
+            if len(hash_map) <= maxLetters and r - l + 1 == minSize:
+                res.append(s[l:r + 1])
+                
+        all_char = Counter(res)
+
+        return max(all_char.values()) if all_char else 0
