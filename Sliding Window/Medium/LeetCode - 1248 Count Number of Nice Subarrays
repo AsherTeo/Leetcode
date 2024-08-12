@@ -1,0 +1,20 @@
+class Solution:
+    def numberOfSubarrays(self, nums: List[int], k: int) -> int:
+        def helper(k):
+            l = 0
+            count_k = 0
+            max_count = 0
+            count = 0
+            for r in range(len(nums)):
+                if nums[r]%2 != 0:
+                    count_k += 1
+
+                while count_k > k:
+                    if nums[l]%2 != 0:
+                        count_k -= 1
+                    l += 1
+                count += r - l + 1
+                max_count = max(max_count, count)
+            return max_count
+            
+        return helper(k) - helper(k - 1)
