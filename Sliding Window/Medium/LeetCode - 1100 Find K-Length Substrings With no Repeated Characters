@@ -1,0 +1,11 @@
+class Solution:
+    def numKLenSubstrNoRepeats(self, s: str, k: int) -> int:
+        l = 0
+        count = 0
+        for r in range(len(s) - k + 1):
+            substrings = s[r: r + k]
+            hash_map = set(substrings)
+
+            if len(hash_map) == k:
+                count += 1
+        return count
