@@ -1,0 +1,18 @@
+class Solution:
+    def distinctNumbers(self, nums: List[int], k: int) -> List[int]:
+        res = []
+        l = 0
+        hash_map = Counter()
+
+        for r in range(len(nums)):
+            hash_map[nums[r]] += 1
+
+            while r - l + 1 > k:
+                hash_map[nums[l]] -= 1
+                if hash_map[nums[l]] == 0:
+                    del hash_map[nums[l]]
+                l += 1
+            if r - l + 1 == k:
+                res.append(len(hash_map))
+            
+        return res
