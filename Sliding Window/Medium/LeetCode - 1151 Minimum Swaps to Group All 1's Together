@@ -1,0 +1,20 @@
+class Solution:
+    def minSwaps(self, data: List[int]) -> int:
+        k = sum(data)
+        
+        l = 0
+        count = 0
+        max_count = 0
+
+        for r in range(len(data)):
+            
+            if data[r] == 1:
+                count += 1
+
+            while r - l + 1 == k:
+                max_count = max(max_count , count)
+                if data[l] == 1:
+                    count -= 1
+                l += 1
+
+        return k - max_count
