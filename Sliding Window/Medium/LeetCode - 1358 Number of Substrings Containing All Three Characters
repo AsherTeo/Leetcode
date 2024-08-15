@@ -1,0 +1,17 @@
+class Solution:
+    def numberOfSubstrings(self, s: str) -> int:
+        l = 0
+        hash_map = Counter()
+        count = 0
+
+        for r in range(len(s)):
+            hash_map[s[r]] += 1
+                
+            while len(hash_map) == 3:
+                count += (len(s) - r)
+                hash_map[s[l]] -= 1
+                if hash_map[s[l]] == 0:
+                    del hash_map[s[l]]
+                l += 1
+
+        return count
