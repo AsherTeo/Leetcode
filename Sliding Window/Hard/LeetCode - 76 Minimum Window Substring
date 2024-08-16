@@ -1,0 +1,29 @@
+class Solution:
+    def minWindow(self, s: str, t: str) -> str:
+        t_hash_map = Counter(t)
+        s_hash_map = Counter()
+        correct, target = 0, len(t_hash_map)
+
+        l = 0
+        min_l, min_r, min_count = 0, 0, float('inf')
+        res = ""
+
+        for r in range(len(s)):
+            if s[r] in t_hash_map:
+                s_hash_map[s[r]] += 1
+                if s_hash_map[s[r]] == t_hash_map[s[r]]:
+                    correct += 1
+           
+            while correct == target:
+                if r - l + 1 < min_count:
+                    min_l = l
+                    min_r = r
+                    min_count = min_r - min_l + 1
+                    res = s[min_l: min_r + 1]
+
+                if s[l] in t_hash_map:
+                    s_hash_map[s[l]] -= 1
+                    if s_hash_map[s[l]] < t_hash_map[s[l]]:
+                        correct -= 1
+                l += 1
+        return res
