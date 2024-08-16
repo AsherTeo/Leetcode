@@ -1,0 +1,21 @@
+class Solution:
+    def longestValidSubstring(self, word: str, forbidden: List[str]) -> int:
+        l = 0   
+        max_count = 0
+        forbidden_set = set(forbidden)  
+        max_forbidden_len = max(len(f) for f in forbidden)
+
+        def is_valid(l, r):
+            for i in range(max_forbidden_len):
+                if l + i > r: 
+                    break
+                if word[r - i:r + 1] in forbidden_set:
+                    return True
+            return False
+
+        for r in range(len(word)):
+            while is_valid(l, r):
+                l += 1
+            max_count = max(max_count, r - l + 1)
+                
+        return max_count
