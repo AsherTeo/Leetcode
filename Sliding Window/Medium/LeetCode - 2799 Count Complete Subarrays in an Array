@@ -1,0 +1,44 @@
+########################################################################### Method 1 ##################################################################
+
+class Solution:
+    def countCompleteSubarrays(self, nums: List[int]) -> int:
+
+        k = len(set(nums))
+        def helper(k):
+            l = 0
+            count = 0
+            hash_map = Counter()
+
+            for r in range(len(nums)):
+                hash_map[nums[r]] += 1
+
+                while len(hash_map) > k:
+                    hash_map[nums[l]] -= 1
+                    if hash_map[nums[l]] == 0:
+                        del hash_map[nums[l]]
+                    l += 1
+                count += r - l + 1
+            return count
+        return helper(k) - helper(k - 1)
+
+########################################################################### Method 2 ##################################################################
+
+class Solution:
+    def countCompleteSubarrays(self, nums: List[int]) -> int:
+
+        k = len(set(nums))
+
+        l, count = 0 ,0
+        hash_map = Counter()
+
+        for r in range(len(nums)):
+            hash_map[nums[r]] += 1
+
+            while len(hash_map) == k:
+                count += len(nums) - r
+                hash_map[nums[l]] -= 1
+                if hash_map[nums[l]] == 0:
+                    del hash_map[nums[l]]
+                l += 1
+
+        return count
