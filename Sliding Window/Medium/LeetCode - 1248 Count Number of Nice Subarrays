@@ -1,3 +1,5 @@
+############################################################################ Method 1 ##################################################
+
 class Solution:
     def numberOfSubarrays(self, nums: List[int], k: int) -> int:
         def helper(k):
@@ -18,3 +20,19 @@ class Solution:
             return max_count
             
         return helper(k) - helper(k - 1)
+
+############################################################################ Method 2 ##################################################
+
+class Solution:
+    def numberOfSubarrays(self, nums: List[int], k: int) -> int:
+        q = deque()
+        l, count = 0, 0
+
+        for r in range(len(nums)):
+            if nums[r]%2 == 1:
+                q.append(r)
+            if len(q) > k:
+                l = q.popleft() + 1
+            if len(q) == k:
+                count += q[0] - l + 1
+        return count
