@@ -1,0 +1,9 @@
+class Solution:
+    def numJewelsInStones(self, jewels: str, stones: str) -> int:
+        hash_map_stones = Counter(stones)
+        res = 0
+
+        for jewel in jewels:
+            if jewel in hash_map_stones:    
+                res += hash_map_stones[jewel]
+        return res
