@@ -1,0 +1,8 @@
+class Solution:
+    def numIdenticalPairs(self, nums: List[int]) -> int:
+        hash_map = Counter(nums)
+        count = 0
+        for k, v in hash_map.items():
+            if v > 1:
+                count += math.comb(v,2)
+        return count
