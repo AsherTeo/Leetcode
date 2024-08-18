@@ -1,0 +1,5 @@
+class Solution:
+    def maxFrequencyElements(self, nums: List[int]) -> int:
+        hash_map = Counter(nums)
+        max_freq = max(hash_map.values())
+        return sum([v for k, v in hash_map.items() if v == max_freq])
