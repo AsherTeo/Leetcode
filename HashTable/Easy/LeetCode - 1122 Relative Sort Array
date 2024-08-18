@@ -1,0 +1,14 @@
+class Solution:
+    def relativeSortArray(self, arr1: List[int], arr2: List[int]) -> List[int]:
+        arr1_set = set(arr1)
+        hash_map = Counter(arr1)
+        res, ans = [], []
+
+        for num in arr1_set:
+            if num not in arr2:
+                res.append(num)
+        arr2.extend(sorted(res))
+
+        for char in arr2:
+            ans += [char] * hash_map[char]
+        return ans
