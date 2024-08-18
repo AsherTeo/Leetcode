@@ -1,0 +1,9 @@
+class Solution:
+    def areOccurrencesEqual(self, s: str) -> bool:
+        hash_map = Counter(s)
+        max_values = max(hash_map.values())
+
+        for k, v in hash_map.items():
+            if v != max_values:
+                return False
+        return True
