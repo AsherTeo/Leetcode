@@ -1,0 +1,11 @@
+class Solution:
+    def longestPalindrome(self, s: str) -> int:
+        
+        hash_map = Counter(s)
+        even = [v for k, v in hash_map.items() if v%2 == 0]
+        odd = deque(sorted([v for k, v in hash_map.items() if v%2 == 1], reverse = True))
+        if odd:
+            max_odd = odd.popleft()
+            return sum(even) + max_odd + sum(odd) - len(odd)
+        else:
+            return sum(even)
