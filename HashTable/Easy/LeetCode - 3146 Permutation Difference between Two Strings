@@ -1,0 +1,15 @@
+class Solution:
+    def findPermutationDifference(self, s: str, t: str) -> int:
+        s_map = Counter()
+        t_map = Counter()
+        total = 0
+
+        for i in range(len(s)):
+            s_map[s[i]] = i
+
+        for i in range(len(t)):
+            t_map[t[i]] = i
+
+        for char in s:
+            total += abs(s_map[char] - t_map[char])
+        return total
