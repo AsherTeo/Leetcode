@@ -1,0 +1,9 @@
+class Solution:
+    def frequencySort(self, nums: List[int]) -> List[int]:
+        res = []
+        hash_map = Counter(nums)
+        sorted_freq = sorted(hash_map.items(), key=lambda x:(x[1],-x[0]))
+        
+        for num, freq in sorted_freq:
+            res.extend([num] * freq)
+        return res
