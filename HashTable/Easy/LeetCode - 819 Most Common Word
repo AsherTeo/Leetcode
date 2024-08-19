@@ -1,0 +1,11 @@
+class Solution:
+    def mostCommonWord(self, paragraph: str, banned: List[str]) -> str:
+        hash_map = Counter()
+        paragraph = re.sub(r'[^\w\s]', ' ', paragraph).lower()
+        for word in paragraph.split():
+            hash_map[word] += 1
+            if banned:
+                for i in range(len(banned)):
+                    if banned[i] in hash_map: 
+                        del hash_map[banned[i]]
+        return [k for k ,v in hash_map.items() if v == max(hash_map.values())][0]
