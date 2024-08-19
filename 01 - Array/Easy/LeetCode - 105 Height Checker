@@ -1,8 +1,0 @@
-class Solution(object):
-    def heightChecker(self, heights):
-        sorted_lst = sorted(heights)
-        res = 0
-        for nums in zip(sorted_lst, heights):
-            if nums[0] != nums[1]:
-                res += 1
-        return res
