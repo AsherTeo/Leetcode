@@ -1,0 +1,24 @@
+class Solution:
+    def reorganizeString(self, s: str) -> str:
+        hash_map = Counter(s)
+        res = []
+        freq_lst = sorted(hash_map.items(), key = lambda x : x[1], reverse = True)
+
+        for char in freq_lst:
+            res.extend([char[0]] * char[1])
+
+        res = deque(res)
+        arr = len(s) * [0]
+        i = 0
+        
+        while res:
+            if i > len(s) - 1:
+                i = 1
+            arr[i] = res[0]
+            res.popleft()
+            i += 2
+
+        for index in range(1, len(arr)):
+            if arr[index] == arr[index - 1]:
+                return ""
+        return ''.join(arr)
