@@ -1,0 +1,9 @@
+class Solution:
+    def maxNumberOfBalloons(self, text: str) -> int:
+        balloon_dict = {'b':1, 'a': 1, 'l':2, 'o':2, 'n':1}
+        text_map = Counter(text)
+        res = []
+
+        for b in balloon_dict:
+            res.append(text_map[b]//balloon_dict[b])
+        return min(res)
