@@ -1,0 +1,10 @@
+class Solution:
+    def findMaxK(self, nums: List[int]) -> int:
+        hash_map = Counter()
+        max_val = -1
+
+        for num in nums:
+            hash_map[num] += 1
+            if -num in hash_map:
+                max_val = max(max_val, abs(num))
+        return max_val
