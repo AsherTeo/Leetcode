@@ -1,0 +1,13 @@
+class Solution:
+    def customSortString(self, order: str, s: str) -> str:
+        order_dict = {char: index for index, char in enumerate(order)}
+        extra_word, new_s = [], []
+
+        for char in s:
+            if char not in order_dict:
+                extra_word.append(char)
+            else:
+                new_s.append(char)
+        s_new = ''.join(new_s)
+        
+        return ''.join(sorted(s_new, key = lambda x: order_dict[x]) + extra_word)
