@@ -1,0 +1,8 @@
+class Solution:
+    def findTheDifference(self, s: str, t: str) -> str:
+        s_map = Counter(s)
+        t_map = Counter(t)
+        
+        for char in t_map:
+            if s_map[char] != t_map[char] or char not in s_map:
+                return char
