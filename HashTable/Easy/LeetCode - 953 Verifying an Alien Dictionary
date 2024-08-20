@@ -1,0 +1,7 @@
+class Solution:
+    def isAlienSorted(self, words: List[str], order: str) -> bool:
+        def helper(word,alien_dict):
+            return [alien_dict[char] for char in word]
+
+        alien_dict = {char: i for i, char in enumerate(order)}
+        return words == sorted(words, key = lambda word:helper(word, alien_dict))
