@@ -1,0 +1,18 @@
+class Solution:
+    def wordPattern(self, pattern: str, s: str) -> bool:
+        pattern_map = Counter()
+        s_map = Counter()
+
+        s = s.split(' ')
+
+        if len(pattern) != len(s):
+            return False
+
+        for p, word in zip(pattern, s):
+            if (p in pattern_map and pattern_map[p] != word) or (word in s_map and s_map[word] != p):
+                return False
+           
+            pattern_map[p] = word
+            s_map[word] = p
+            
+        return True
