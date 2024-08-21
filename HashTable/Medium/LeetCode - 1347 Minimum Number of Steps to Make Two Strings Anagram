@@ -1,0 +1,17 @@
+class Solution:
+    def minSteps(self, s: str, t: str) -> int:
+        s_map = Counter(s)
+        t_map = Counter(t)
+
+        if s_map == t_map:
+            return 0
+        count = 0
+
+        for char in t_map:
+            if char not in s_map:
+                count += t_map[char]
+            if char in s_map:
+                if t_map[char] > s_map[char]:
+                    count += (t_map[char] - s_map[char])
+                    
+        return count 
