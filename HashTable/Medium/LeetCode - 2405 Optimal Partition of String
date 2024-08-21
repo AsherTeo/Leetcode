@@ -1,0 +1,10 @@
+class Solution:
+    def partitionString(self, s: str) -> int:
+        hash_set = set()
+        count = 1   # count the first set 
+        for char in s:
+            if char in hash_set:
+                count += 1
+                hash_set = set()
+            hash_set.add(char)
+        return count 
