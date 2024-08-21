@@ -1,0 +1,15 @@
+class Solution:
+    def findMatrix(self, nums: List[int]) -> List[List[int]]:
+        res = []
+        hash_map = Counter(nums)
+
+        while hash_map:
+            hash_set = list(set(hash_map))
+            res.append(hash_set)
+            
+            for num in hash_set:
+                if num in hash_map:
+                    hash_map[num] -= 1
+                    if hash_map[num] == 0:
+                        del hash_map[num]
+        return res
