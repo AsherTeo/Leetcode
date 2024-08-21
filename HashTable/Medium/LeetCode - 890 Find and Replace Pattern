@@ -1,0 +1,20 @@
+class Solution:
+    def findAndReplacePattern(self, words: List[str], pattern: str) -> List[str]:
+        
+        def helper(word):
+            hash_map_word = Counter()
+            hash_map_pattern = Counter()
+
+            for w,p in zip(word, pattern):
+                if (w in hash_map_word and hash_map_word[w] != p) or (p in hash_map_pattern and hash_map_pattern[p] != w):
+                     return False
+                hash_map_word[w] = p
+                hash_map_pattern[p] = w
+            return True
+
+        res = []
+        
+        for word in words:
+            if helper(word):
+                res.append(word)
+        return res
