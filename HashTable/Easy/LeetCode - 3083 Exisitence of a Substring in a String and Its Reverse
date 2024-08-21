@@ -1,0 +1,13 @@
+class Solution:
+    def isSubstringPresent(self, s: str) -> bool:
+        hash_map = Counter()
+        n = len(s) - 2 + 1
+        s_rev = s[::-1]
+
+        for i in range(n):
+            hash_map[s[i: i + 2]] += 1
+        
+        for i in range(n):
+            if s_rev[i: i + 2] in hash_map:
+                return True
+        return False
