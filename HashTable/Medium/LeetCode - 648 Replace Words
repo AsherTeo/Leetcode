@@ -1,0 +1,16 @@
+class Solution:
+    def replaceWords(self, dictionary: List[str], sentence: str) -> str:
+        res = []
+        d = set(dictionary)
+        
+        for word in sentence.split(' '):
+            replaced = False
+            for i in range(1, len(word)):
+                if word[:i] in d:
+                    res.append(word[:i])
+                    replaced = True
+                    break
+            if replaced == False:
+                res.append(word)
+
+        return ' '.join(res)
