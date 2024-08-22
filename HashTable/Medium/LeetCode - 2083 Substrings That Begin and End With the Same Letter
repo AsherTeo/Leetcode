@@ -1,0 +1,8 @@
+class Solution:
+    def numberOfSubstrings(self, s: str) -> int:
+        hash_map = Counter(s)
+        count = len(s)
+
+        for key, val in hash_map.items():
+            count += math.comb(val,2)
+        return count
