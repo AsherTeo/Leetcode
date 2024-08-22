@@ -1,0 +1,16 @@
+class Solution:
+    def largestPalindromic(self, num: str) -> str:
+        hash_map = Counter(num)
+        middle = max([key for key, value in hash_map.items() if value%2 == 1], default = '0')
+        hash_map = Counter({key: value // 2 for key, value in hash_map.items()})
+        sorted_first = sorted(hash_map.items(), key = lambda x:x[0], reverse = True)
+        
+        first_half = ''.join(num * freq for num, freq in sorted_first)
+        if first_half and first_half[0] == '0':
+            return middle
+   
+        second_half = first_half[::-1]
+        ans = first_half + middle + second_half
+        if len(num) >= len(ans):
+            return ans
+        return first_half + second_half # for test 64 "6006"
