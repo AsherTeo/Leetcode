@@ -1,0 +1,9 @@
+class Solution:
+    def uncommonFromSentences(self, s1: str, s2: str) -> List[str]:
+        s = s1 + " " +s2
+        hash_map = Counter()
+
+        for word in s.split(" "):
+            hash_map[word] += 1
+        
+        return [key for key, val in hash_map.items() if val == 1]
