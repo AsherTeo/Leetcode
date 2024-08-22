@@ -1,0 +1,10 @@
+class Solution:
+    def longestCommonSubsequence(self, arrays: List[List[int]]) -> List[int]:
+        hash_map = Counter(arrays[0])
+
+        for array in arrays[1:]:
+            curr_map = Counter(array)
+            for c in hash_map:
+                hash_map[c] = min(hash_map[c], curr_map[c])
+
+        return [key for key, value in hash_map.items() if value > 0]
