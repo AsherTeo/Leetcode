@@ -1,0 +1,22 @@
+class Solution:
+    def findThePrefixCommonArray(self, A: List[int], B: List[int]) -> List[int]:
+        hash_map_A = Counter()
+        hash_map_B = Counter()
+
+        count = 0
+        res = []
+        
+        for num_A, num_B in zip(A,B):
+            hash_map_A[num_A] += 1
+
+            if num_A in hash_map_B:
+                count += 1
+
+            hash_map_B[num_B] += 1
+
+            if num_B in hash_map_A:
+                count += 1
+
+            res.append(count)
+
+        return res
