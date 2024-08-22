@@ -1,0 +1,10 @@
+class Solution:
+    def intersection(self, nums: List[List[int]]) -> List[int]:
+        hash_map = Counter(nums[0])
+
+        for i in range(1, len(nums)):
+            cur_map = Counter(nums[i])
+            for c in hash_map:
+                hash_map[c] = min(hash_map[c], cur_map[c])
+
+        return sorted([key for key, value in hash_map.items() if value > 0])
