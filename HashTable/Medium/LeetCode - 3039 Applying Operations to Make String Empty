@@ -1,0 +1,14 @@
+class Solution:
+    def lastNonEmptyString(self, s: str) -> str:
+        hash_map = defaultdict(list)
+
+        for index, char in enumerate(s):
+            hash_map[char].append(index)
+
+        if all(len(lst) == 1 for lst in hash_map.values()):
+           return s
+
+        max_len = max(len(lst) for lst in hash_map.values())
+        index = [val[-1] for key, val in hash_map.items() if len(val) == max_len]
+        index.sort()
+        return ''.join([s[i] for i in index])
