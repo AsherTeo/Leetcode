@@ -1,0 +1,31 @@
+class Solution:
+    def partitionLabels(self, s: str) -> List[int]:
+
+        hash_map = defaultdict(list)
+
+        for index, char in enumerate(s):
+            hash_map[char].append(index)
+
+        l = 0
+        r = 0
+        max_index = 0
+        res = []
+        j = 0
+
+        while r < len(s):
+            first = hash_map[s[l]][0] 
+            last  = hash_map[s[r]][-1] 
+        
+            while j < last:
+                j = last
+                sub_strings = s[first:last + 1]
+                distinct_char = list(set(sub_strings))
+            
+                for char in distinct_char:
+                    max_index = max(max_index, max(hash_map[str(char)]))
+                last = max_index
+
+            res.append(last - first + 1)
+            l = last + 1
+            r = l
+        return res
