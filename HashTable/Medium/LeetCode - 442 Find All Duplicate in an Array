@@ -1,0 +1,4 @@
+class Solution:
+    def findDuplicates(self, nums: List[int]) -> List[int]:
+        hash_map = Counter(nums)
+        return [key for key, val in hash_map.items() if val == 2]
