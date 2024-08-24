@@ -1,0 +1,39 @@
+####################################################################### Binary Search ##########################################################
+
+class Solution:
+    def countNegatives(self, grid: List[List[int]]) -> int:
+        
+        def binary_search(nums):
+            l = 0
+            r = len(nums) - 1
+            m = len(nums)
+
+            while l <= r:
+                mid = (l + r)//2
+                if nums[mid] >= 0:
+                    l = mid + 1
+                else:
+                    r = mid - 1
+            return m - l
+
+
+        total_count = 0
+        n = len(grid)
+
+        for i in range(n):
+            total_count += binary_search(grid[i])
+        return total_count
+
+################################################################################# Brute Force ############################################################
+
+class Solution:
+    def countNegatives(self, grid: List[List[int]]) -> int:
+        n = len(grid)
+        m = len(grid[0])
+        count = 0
+
+        for i in range(n):
+            for j in range(m):
+                if grid[i][j] < 0:
+                    count += 1
+        return count
