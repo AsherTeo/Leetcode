@@ -1,0 +1,12 @@
+class Solution:
+    def deleteGreatestValue(self, grid: List[List[int]]) -> int:
+        total = 0
+
+        for _ in range(len(grid[0])):
+            max_value = 0
+            for i in range(len(grid)):
+                max_row = max(grid[i])
+                max_value = max(max_value, max_row)
+                grid[i].pop(grid[i].index(max_row))
+            total += max_value
+        return total
