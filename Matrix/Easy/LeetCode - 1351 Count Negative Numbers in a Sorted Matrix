@@ -16,7 +16,6 @@ class Solution:
                     r = mid - 1
             return m - l
 
-
         total_count = 0
         n = len(grid)
 
