@@ -1,0 +1,21 @@
+class Solution:
+    def modifiedMatrix(self, matrix: List[List[int]]) -> List[List[int]]:
+        n = len(matrix)
+        m = len(matrix[0])
+        max_map = Counter()
+
+        j,max_col_val = 0,0
+
+        while j < m:
+            for i in range(n):
+                col = matrix[i][j]
+                max_col_val = max(max_col_val, col)
+            max_map[j] = max_col_val
+            j += 1
+            max_col_val = 0
+
+        for i in range(n):
+            for j in range(m):
+                if matrix[i][j] == -1:
+                    matrix[i][j] = max_map[j]
+        return matrix
