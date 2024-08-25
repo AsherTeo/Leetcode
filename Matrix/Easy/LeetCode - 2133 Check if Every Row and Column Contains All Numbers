@@ -1,0 +1,15 @@
+class Solution:
+    def checkValid(self, matrix: List[List[int]]) -> bool:
+        n = len(matrix)
+
+        for i in range(n):
+            if len(set(matrix[i])) != n:
+                return False
+        j = 0
+        while j < n:
+            column = [row[j] for row in matrix]
+            if len(set(column)) != n:
+                return False
+            j += 1
+
+        return True
