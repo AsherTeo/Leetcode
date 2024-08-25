@@ -1,0 +1,15 @@
+class Solution:
+    def construct2DArray(self, original: List[int], m: int, n: int) -> List[List[int]]:
+        length = len(original) 
+
+        if length != (m * n):
+            return []
+
+        matrix = [[0] * n for i in range(m)]
+        
+        for i in range(length):
+            x = i // n
+            y = i - (x * n)
+            matrix[x][y] = original[i]
+
+        return matrix
