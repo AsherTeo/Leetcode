@@ -1,0 +1,16 @@
+class Solution:
+    def numSpecial(self, mat: List[List[int]]) -> int:
+        hash_map = Counter()
+        count = 0
+        
+        for row in range(len(mat)):
+            if sum(mat[row]) == 1:
+                for col in range(len(mat[0])):
+                    if mat[row][col] == 1:
+                        hash_map[col] += 1
+        
+        for j in hash_map:
+            columns = [row[j] for row in mat]
+            if sum(columns) == 1:
+                count += 1
+        return count
