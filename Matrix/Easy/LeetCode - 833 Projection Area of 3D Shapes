@@ -1,0 +1,18 @@
+class Solution:
+    def projectionArea(self, grid: List[List[int]]) -> int:
+        row, col = [], []
+        top = 0
+
+        for i in range(len(grid)):
+            max_row = max(grid[i])
+            row.append(max_row)          # Find max value in each row
+            for j in range(len(grid)):
+                if grid[i][j] != 0:
+                    top += 1             # Count number of cubes on top. 
+        j = 0
+        while j < len(grid[i]):
+            columns = max([row[j] for row in grid])
+            col.append(columns)        # Count max value in each column
+            j += 1
+
+        return sum(row) + sum(col) + top    # Add them together
