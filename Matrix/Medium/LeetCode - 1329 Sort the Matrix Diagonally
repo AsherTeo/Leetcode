@@ -1,0 +1,18 @@
+class Solution:
+    def diagonalSort(self, mat: List[List[int]]) -> List[List[int]]:
+        hash_map = defaultdict(list)
+        matrix = [[0] * len(mat[0]) for _ in range(len(mat))]
+
+        for i in range(len(mat)):
+            for j in range(len(mat[0])):
+                hash_map[i-j].append(mat[i][j])
+
+        for key in hash_map:
+            hash_map[key].sort(reverse=True)
+
+        for i in range(len(mat)):
+            for j in range(len(mat[0])):
+                matrix[i][j] = hash_map[i-j][-1]
+                hash_map[i-j].pop(-1)
+
+        return matrix
