@@ -1,0 +1,33 @@
+class Solution:
+    def rotateTheBox(self, box: List[List[str]]) -> List[List[str]]:
+        def rotate(new_box, box):
+            for i in range(n):
+                for j in range(m):
+                    new_box[j][i] = box[i][j]
+
+            for row in new_box:
+                l = 0
+                r = len(row) - 1
+
+                while l < r:
+                    row[l], row[r] = row[r], row[l]
+                    l += 1
+                    r -= 1
+            return new_box 
+
+        n = len(box)
+        m = len(box[0])
+        new_box = [[0] * n for _ in range(m)]
+
+        for row in box:
+            l = 0
+            r = 0
+
+            while r < m:
+                if row[r] == ".":
+                    row[l], row[r] = row[r], row[l]
+                    l += 1
+                if row[r] == "*":
+                    l = r + 1
+                r += 1
+        return rotate(new_box, box)
