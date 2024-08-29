@@ -1,0 +1,47 @@
+class Solution:
+    def minimumOperationsToWriteY(self, grid: List[List[int]]) -> int:
+        n = len(grid)
+        y_pos = []
+        no_diagonal = (n - 1)//2 
+        diag_count, anti_diag_count = 0, 0
+
+        ######################## Create Y - Position ###############################
+
+        for i in range(n):
+            for j in range(n):
+                if diag_count == no_diagonal and anti_diag_count == no_diagonal:
+                    break
+                if i - j == 0:
+                    y_pos.append([i,j])
+                    diag_count += 1
+                if i + j == (n - 1):
+                    y_pos.append([i,j])
+                    anti_diag_count += 1
+
+        i = n // 2 
+        j = n // 2 
+        
+        while i < n:
+            y_pos.append([i,j])
+            i +=1
+
+        ######################## Map the Position into a new Matrix and count the different 'pixel' ###############################
+        
+        def trial_error(pos, y_position):
+            count = 0
+            matrix = [[pos] * n for _ in range(n)]
+            
+            for row, col in y_pos:
+                matrix[row][col] = y_position
+            
+            for i in range(n):
+                for j in range(n):
+                    if matrix[i][j] != grid[i][j]:
+                        count += 1
+            return count
+        
+        return min(trial_error(i, j) for i in range(3) for j in range(3) if i != j )
+
+        # return min(trial_error(0,1), trial_error(0,2),  
+        #            trial_error(1,0), trial_error(1,2),
+        #            trial_error(2,0), trial_error(2,1))
