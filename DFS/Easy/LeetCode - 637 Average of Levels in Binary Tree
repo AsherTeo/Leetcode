@@ -1,0 +1,20 @@
+class Solution:
+    def averageOfLevels(self, root: Optional[TreeNode]) -> List[float]:
+        hash_map = defaultdict(list)
+        res, ans = [], []
+        stack = [(1, root)]
+
+        while stack:
+            depth, node = stack.pop()
+
+            res.append((depth, node.val))
+
+            if node.right:
+                stack.append((depth + 1, node.right))
+            if node.left:
+                stack.append((depth + 1, node.left))
+        
+        for level, val in res:
+            hash_map[level].append(val)
+
+        return [mean(values) for key, values in hash_map.items()]
