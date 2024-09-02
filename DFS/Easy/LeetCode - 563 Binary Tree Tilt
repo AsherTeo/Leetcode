@@ -1,0 +1,20 @@
+class Solution:
+    def findTilt(self, root: Optional[TreeNode]) -> int:
+        stack = [(root, False)]
+        hash_map = {None: 0}
+        total = 0
+
+        while stack:
+            node, state = stack.pop()
+
+            if node:
+                if state:
+                    left = hash_map[node.left]
+                    right = hash_map[node.right]
+                    total += abs(left - right)
+                    hash_map[node] = node.val + left + right
+                else:
+                    stack.append((node, True))
+                    stack.append((node.right, False))
+                    stack.append((node.left, False))
+        return total
