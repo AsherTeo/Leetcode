@@ -1,0 +1,26 @@
+class Solution:
+    def verticalOrder(self, root: Optional[TreeNode]) -> List[List[int]]:
+        if not root:
+            return []
+            
+        stack = [(root, 0, 1)]
+
+        res = []
+        hash_map = defaultdict(list)
+
+        while stack:
+            node, x, y = stack.pop()
+
+            res.append((node.val, x, y))
+
+            if node.right:
+                stack.append((node.right, x + 1, y + 1))
+            if node.left:
+                stack.append((node.left, x - 1, y + 1))
+
+        res = sorted(res, key = lambda x:[x[1], x[2]])
+        
+        for num, x, y in res:
+            hash_map[x].append(num)
+
+        return hash_map.values()
