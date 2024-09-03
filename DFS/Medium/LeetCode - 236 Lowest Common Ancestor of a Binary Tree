@@ -1,0 +1,28 @@
+
+
+################################################################# Not optimal ###############################################################
+
+class Solution:
+    def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
+        def find_path(target):
+            stack = [(root, [root])]
+            
+            while stack:
+                node, path = stack.pop()
+
+                if node.val == target.val:
+                    return path
+
+                if node.right:
+                    stack.append((node.right, path + [node.right]))
+
+                if node.left:
+                    stack.append((node.left, path + [node.left]))
+        
+        p_path = find_path(p)[::-1]
+        q_path = find_path(q)[::-1]
+        
+        for i in range(len(p_path)):
+            for j in range(len(q_path)):
+                if p_path[i] == q_path[j]:
+                    return p_path[i]
