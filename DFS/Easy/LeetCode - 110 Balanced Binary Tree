@@ -1,0 +1,22 @@
+class Solution:
+    def isBalanced(self, root: Optional[TreeNode]) -> bool:
+        stack = [(root, False)]
+        hash_map = {None: 0}
+
+        while stack:
+            node, state = stack.pop()
+
+            if node:
+                if state:
+                    left = hash_map[node.left]
+                    right = hash_map[node.right]
+
+                    if abs(left - right) > 1:
+                        return False
+                        
+                    hash_map[node] = max(left, right) + 1
+                else:
+                    stack.append((node, True))
+                    stack.append((node.right, False))
+                    stack.append((node.left, False))
+        return True
