@@ -1,0 +1,20 @@
+class Solution:
+    def diameterOfBinaryTree(self, root: Optional[TreeNode]) -> int:
+        stack = [(root, False)]
+        max_diameter = 0
+        hash_map = {None: 0}
+
+        while stack:
+            node, state = stack.pop()
+
+            if node:
+                if state:
+                    left = hash_map[node.left]
+                    right = hash_map[node.right]
+                    max_diameter = max(max_diameter, left + right)
+                    hash_map[node] = max(left, right) + 1
+                else:
+                    stack.append((node, True))
+                    stack.append((node.right, False))
+                    stack.append((node.left, False))
+        return max_diameter
