@@ -1,0 +1,20 @@
+class Solution:
+    def removeLeafNodes(self, root: Optional[TreeNode], target: int) -> Optional[TreeNode]:
+        stack = [(root, False)]
+
+        while stack:
+            node, state = stack.pop()
+
+            if node:
+                if state:
+                    if node.left and node.left.val == target  and node.left.left is None and node.left.right is None:
+                        node.left = None
+                    if node.right and node.right.val == target  and node.right.left is None and node.right.right is None:
+                        node.right = None
+                else:
+                    stack.append((node, True))
+                    stack.append((node.right, False))
+                    stack.append((node.left, False))
+        if root.val == target and root.left is None and root.right is None:
+            root = None
+        return root
