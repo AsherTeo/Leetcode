@@ -1,0 +1,26 @@
+class Solution:
+    def findFrequentTreeSum(self, root: Optional[TreeNode]) -> List[int]:
+        stack = [(root, False)]
+        res = []
+        hash_map= {}
+        freq = defaultdict(int)
+
+        while stack:
+            node, state = stack.pop()
+            left, right = 0, 0
+            if node:
+                if state:
+                   left = hash_map.get(node.left, 0)
+                   right = hash_map.get(node.right, 0)
+
+                   hash_map[node] = left + right + node.val
+
+                else:
+                    stack.append((node, True))
+                    stack.append((node.right, False))
+                    stack.append((node.left, False))
+        
+        for sum_val in hash_map.values():
+            freq[sum_val] += 1
+        
+        return [key for key, val in freq.items() if val == max(freq.values())]
