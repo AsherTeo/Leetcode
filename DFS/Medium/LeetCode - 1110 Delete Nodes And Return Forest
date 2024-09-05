@@ -1,3 +1,42 @@
+
+############################################################### Recursion ##########################################################
+
+class Solution:
+    def delNodes(self, root: Optional[TreeNode], to_delete: List[int]) -> List[TreeNode]:
+        to_delete = set(to_delete)
+        self.res = []
+
+        def dfs(node):
+            if node is None:
+                return None
+            dfs(node.left)
+            dfs(node.right)
+            if node.left and node.left.val in to_delete:
+                self.res.append(node.left.left)
+                self.res.append(node.left.right)
+                node.left = None
+                
+            if node.right and node.right.val in to_delete:
+                self.res.append(node.right.left)
+                self.res.append(node.right.right)
+                node.right = None
+            return root
+        root = dfs(root)
+
+        if root.val in to_delete:
+            if root.left:
+                self.res.append(root.left)
+            if root.right:
+                self.res.append(root.right)
+            root = None
+        else:
+            self.res.append(root)
+
+        self.res = [lst for lst in self.res if lst]
+        return self.res
+
+############################################################### Iterative ##########################################################
+
 class Solution:
     def delNodes(self, root: Optional[TreeNode], to_delete: List[int]) -> List[TreeNode]:
         to_delete = set(to_delete)
