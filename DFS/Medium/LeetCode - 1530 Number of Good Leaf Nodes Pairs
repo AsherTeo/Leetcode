@@ -1,0 +1,60 @@
+################################################################################## Not optimal #################################################
+
+class Solution:
+    def countPairs(self, root: TreeNode, distance: int) -> int:
+
+        def find_leaf(root):
+            stack = [(root, None)]
+            hash_map = {}
+            leaf_nodes = []
+            
+            while stack:
+                node, parent = stack.pop()
+
+                hash_map[node] = parent
+
+                if node.left is None and node.right is None:
+                    leaf_nodes.append(node)
+
+                if node.right:
+                    stack.append((node.right, node))
+                if node.left:
+                    stack.append((node.left, node))
+
+            return hash_map, leaf_nodes
+
+        def find_lca(hash_map, p, q):
+            seen = set()
+            dis, count = 0, 0
+            pp = p
+            qq = q
+
+            while p:
+                seen.add(p)
+                p = hash_map[p]
+
+            while q not in seen:
+                q = hash_map[q]
+
+            lca = q
+
+            while pp != lca:
+                pp = hash_map[pp]
+                dis += 1
+            
+            while qq != lca:
+                qq = hash_map[qq]
+                dis += 1
+            
+            if dis <= distance:
+                count += 1
+                
+            return count
+
+        hash_map, leaf_nodes = find_leaf(root)
+        total_count = 0
+
+        for i in range(len(leaf_nodes)):
+            for j in range(i + 1, len(leaf_nodes)):
+                total_count += find_lca(hash_map, leaf_nodes[i], leaf_nodes[j]) 
+        return total_count
