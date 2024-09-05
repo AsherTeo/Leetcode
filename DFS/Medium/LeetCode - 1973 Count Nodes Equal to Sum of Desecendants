@@ -1,0 +1,20 @@
+class Solution:
+    def equalToDescendants(self, root: Optional[TreeNode]) -> int:
+        stack = [(root, False)]
+        sum_dict = {None:0}
+        count = 0
+
+        while stack:
+            node, state = stack.pop()
+            if node:
+                if state:
+                    left = sum_dict[node.left]
+                    right = sum_dict[node.right]
+                    if left + right == node.val:
+                        count += 1
+                    sum_dict[node] = left + right + node.val
+                else:
+                    stack.append((node, True))
+                    stack.append((node.right, False))
+                    stack.append((node.left, False))
+        return count
