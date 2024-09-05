@@ -1,3 +1,5 @@
+######################################################## Iterative #############################################
+
 class Solution:
     def equalToDescendants(self, root: Optional[TreeNode]) -> int:
         stack = [(root, False)]
@@ -18,3 +20,23 @@ class Solution:
                     stack.append((node.right, False))
                     stack.append((node.left, False))
         return count
+
+######################################################## Recursion #############################################
+
+class Solution:
+    def equalToDescendants(self, root: Optional[TreeNode]) -> int:
+        self.count = 0
+        
+        def dfs(node):
+            if node is None:
+                return 0
+
+            left = dfs(node.left)
+            right = dfs(node.right)
+            
+            if left + right == node.val:
+                self.count += 1
+            return left + right + node.val
+        dfs(root)
+
+        return self.count
