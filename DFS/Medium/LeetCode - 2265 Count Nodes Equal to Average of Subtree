@@ -1,0 +1,35 @@
+class Solution:
+    def averageOfSubtree(self, root: TreeNode) -> int:
+
+        stack = [(root, False)]
+        count_dict = {}
+        sum_dict = {}
+        count = 0
+        
+        while stack:
+            node, state = stack.pop()
+            if node:
+                left_count, left_sum = 0, 0
+                right_count, right_sum = 0, 0
+
+                if state:
+                    if node.left:
+                        left_count = count_dict[node.left]
+                        left_sum = sum_dict[node.left]
+
+                    if node.right:
+                        right_count = count_dict[node.right]
+                        right_sum = sum_dict[node.right]
+                    
+                
+                    sum_dict[node] = left_sum + right_sum + node.val
+                    count_dict[node] = left_count + right_count + 1
+
+                    if (sum_dict[node])//(count_dict[node]) == node.val:
+                        count += 1
+
+                else:
+                    stack.append((node, True))
+                    stack.append((node.right, False))
+                    stack.append((node.left, False))
+        return count
