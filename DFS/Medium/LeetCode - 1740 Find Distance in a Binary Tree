@@ -1,0 +1,38 @@
+class Solution:
+    def findDistance(self, root: Optional[TreeNode], p: int, q: int) -> int:
+        def find_lca(p,q):
+            stack = [(root, None)]
+            hash_map = {}
+            seen = set()
+
+            while stack:
+                node, parent = stack.pop()
+
+                hash_map[node.val] = parent
+                
+                if node.right:
+                    stack.append((node.right, node.val))
+                if node.left:
+                    stack.append((node.left, node.val))
+            while p:
+                seen.add(p)
+                p = hash_map[p]
+            while q not in seen:
+                q = hash_map[q]
+            
+            return q, hash_map
+
+        lca, hash_map = find_lca(p,q)
+
+        distance_p = 0
+        distance_q = 0
+
+        while p != lca:
+            p = hash_map[p]
+            distance_p += 1
+
+        while q != lca:
+            q = hash_map[q]
+            distance_q += 1
+
+        return distance_p + distance_q
