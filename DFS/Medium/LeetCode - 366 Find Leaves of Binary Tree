@@ -1,0 +1,66 @@
+#################################################################### Heights ####################################################################
+
+class Solution:
+    def findLeaves(self, root: Optional[TreeNode]) -> List[List[int]]:
+        
+        height = {None : 0}
+        stack = [(root, False)]
+
+        while stack:
+            node, state = stack.pop()  
+            if node:
+                if state:
+                    left = height[node.left]
+                    right = height[node.right]
+                    height[node] = max(left, right) + 1
+                else:
+                    stack.append((node, True))
+                    stack.append((node.right, False))
+                    stack.append((node.left, False))
+
+       
+        if None in height:
+            del height[None]
+
+        hash_map = defaultdict(list)
+
+        for key, value in height.items():
+            hash_map[value].append(key.val)
+
+        return hash_map.values()
+
+#################################################################### Remove Leaf ####################################################################
+
+class Solution:
+    def findLeaves(self, root: Optional[TreeNode]) -> List[List[int]]:
+        ans = []
+
+        while root:
+            res = []
+            stack = [root]  
+            val = root.val
+            
+            while stack:
+                node = stack.pop()
+
+                if node.left and node.left.left is None and node.left.right is None:
+                    res.append(node.left.val)
+                    node.left = None
+
+                if node.right and node.right.left is None and node.right.right is None:
+                    res.append(node.right.val)
+                    node.right = None
+                    
+                if node.left:
+                    stack.append((node.left))
+                if node.right:
+                    stack.append((node.right))
+
+            ans.append(res)
+
+            if root.val == val and root.left is None and root.right is None:
+                root = None
+
+        ans.append([val])
+        ans = [lst for lst in ans if lst]
+        return ans
