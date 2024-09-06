@@ -1,0 +1,52 @@
+class Solution:
+    def subtreeWithAllDeepest(self, root: TreeNode) -> TreeNode:
+        self.hash_map = {}
+        self.res = []
+        
+        def max_depth(node):
+            if not node:
+                return 0
+            left = max_depth(node.left)
+            right = max_depth(node.right)
+            return max(left, right) + 1
+
+        self.max_depths = max_depth(root)
+
+        def build_dict(node, parent, depth):
+            if not node:
+                return 
+          
+            self.hash_map[node] = parent
+
+            if depth == self.max_depths and node.left is None and node.right is None:
+                self.res.append(node)
+
+            build_dict(node.left, node, depth + 1)
+            build_dict(node.right, node, depth + 1)
+
+        def find_lca(p, q):
+            ancestors = set()
+            while p:
+                ancestors.add(p)
+                p = self.hash_map.get(p)
+
+            while q not in ancestors:
+                q = self.hash_map.get(q)
+            
+            return q
+        
+        build_dict(root, None, 1)
+        if len(self.res) == 1:
+            return self.res[0]
+
+        # First and Last Leaf Nodes
+
+        lca = find_lca(self.res[0], self.res[-1])
+        return lca
+
+        ### Loop all Leaf Node ########
+        
+        # lca = self.res[0]
+        # for node in self.res[1:]:
+        #     lca = find_lca(node, lca)
+        # return lca
