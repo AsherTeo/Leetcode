@@ -1,3 +1,27 @@
+############################################################ Recursion ###########################################
+
+class Solution:
+    def isCousins(self, root: Optional[TreeNode], x: int, y: int) -> bool:
+        self.res = []
+        def dfs(node, parent, depth):
+            
+            if not node:
+                return 0
+
+            if node.val == x or node.val == y:
+                self.res.append((node.val, parent, depth))
+
+            dfs(node.left, node, depth + 1)
+            dfs(node.right, node, depth + 1)
+
+        dfs(root, None, 1)
+        
+        return self.res[0][1] != self.res[1][1] and self.res[0][2] == self.res[1][2]
+
+
+
+############################################################ Iterative ###########################################
+
 class Solution:
     def isCousins(self, root: Optional[TreeNode], x: int, y: int) -> bool:
         stack = [(root, None, 1)]
