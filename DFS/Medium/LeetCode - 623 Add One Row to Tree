@@ -1,0 +1,25 @@
+class Solution:
+    def addOneRow(self, root: Optional[TreeNode], val: int, depth: int) -> Optional[TreeNode]:
+        stack = [(root, 1)]
+
+        if depth == 1:
+            left = root
+            root = TreeNode(val, left, None)
+            return root
+
+        while stack:
+            node, d = stack.pop()
+
+            if d == depth - 1:
+
+                left = node.left
+                node.left = TreeNode(val, left, None)
+
+                right = node.right
+                node.right = TreeNode(val, None, right)
+                
+            if node.right:
+                stack.append((node.right, d + 1))
+            if node.left:
+                stack.append((node.left, d + 1))
+        return root
