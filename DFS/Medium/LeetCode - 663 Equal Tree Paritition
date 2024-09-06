@@ -1,0 +1,25 @@
+class Solution:
+    def checkEqualTree(self, root: Optional[TreeNode]) -> bool:
+        
+        def total_sum(node):
+            if not node:
+                return 0
+            return total_sum(node.left) + total_sum(node.right) + node.val
+
+        self.total = total_sum(root)
+
+        stack = [(root, False)]
+        is_root = root
+        while stack:
+            node, state = stack.pop()
+            if node:
+                if state:
+                    if node != is_root:
+                        curr_sum = total_sum(node)
+                        if 2 * curr_sum == self.total:
+                            return True
+                else:
+                    stack.append((node, True))
+                    stack.append((node.right, False))
+                    stack.append((node.left, False))
+        return False
