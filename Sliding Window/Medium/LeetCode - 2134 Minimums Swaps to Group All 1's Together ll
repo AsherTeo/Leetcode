@@ -1,3 +1,29 @@
+
+############################################################### Better #######################################################
+
+class Solution:
+    def minSwaps(self, nums: List[int]) -> int:
+
+        target = sum(nums)
+        first = sum(nums[:target])
+
+        min_count = target - first
+        count = min_count
+        nums += nums[:len(nums)//2 + 1]
+        l = 0
+
+        for r in range(target, len(nums)):
+            if nums[r] == 0:
+                count += 1
+            if nums[l] == 0:
+                count -= 1
+            l += 1
+            min_count = min(min_count, count)
+        return min_count
+
+
+########################################################### Slower ###############################################
+
 class Solution:
     def minSwaps(self, nums: List[int]) -> int:
         num_of_ones = nums.count(1)
