@@ -1,0 +1,26 @@
+class Solution:
+    def pruneTree(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
+        stack = [(root, False)]
+        hash_map = Counter()
+
+        while stack:
+            node, state = stack.pop()
+            if node:
+                if state:
+                    left = hash_map.get(node.left, 0)
+                    right = hash_map.get(node.right, 0)
+                    hash_map[node] = max(left + right, node.val)
+
+                    if left == 0:
+                        node.left = None
+                    if right == 0:
+                        node.right = None
+
+                else:
+                    stack.append((node, True))
+                    stack.append((node.right, False))
+                    stack.append((node.left, False))
+                    
+        if node.val == 0 and node.left is None and node.right is None:
+            root = None
+        return root
