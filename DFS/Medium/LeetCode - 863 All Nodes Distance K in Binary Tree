@@ -1,12 +1,7 @@
 class Solution:
     def distanceK(self, root: TreeNode, target: TreeNode, k: int) -> List[int]:
 
-        self.hash_map = defaultdict(list)
-
-        def dfs(node, parent):
-
-            dfs(node.left, node)
-            dfs(node.right)
+        hash_map = defaultdict(list)
         stack = [(root, None)]
         
         while stack:
