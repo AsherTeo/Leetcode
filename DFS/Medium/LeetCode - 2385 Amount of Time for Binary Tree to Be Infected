@@ -1,0 +1,30 @@
+class Solution:
+    def amountOfTime(self, root: Optional[TreeNode], start: int) -> int:
+        self.hash_map = defaultdict(list)
+
+        def build_map(node, parent):
+            if not node:
+                return 
+            if parent:
+                self.hash_map[node.val].append(parent.val)
+            if node.left:
+                self.hash_map[node.val].append(node.left.val)
+            if node.right:
+                self.hash_map[node.val].append(node.right.val)
+            build_map(node.left, node)
+            build_map(node.right, node)
+
+        build_map(root, None)
+
+        stack = [(start, 0)]
+        seen = set()
+        max_min = 0
+        
+        while stack:
+            node, minutes = stack.pop()
+            seen.add(node)
+            max_min = max(max_min, minutes)
+            for num in self.hash_map[node]:
+                if num not in seen:
+                    stack.append((num, minutes + 1))
+        return max_min
