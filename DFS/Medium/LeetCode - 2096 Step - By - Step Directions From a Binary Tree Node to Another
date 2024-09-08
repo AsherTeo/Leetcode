@@ -24,14 +24,12 @@ class Solution:
         build_dic(root, None, "")
         lca = find_lca(startValue, destValue)
 
-        count = 0
+        start_res = []
         dest_res = []
 
         while startValue != lca:
-            count += 1
+            start_res.append("U")
             startValue = self.hash_map[startValue][0]
-
-        start_res = ["U" for _ in range(count)]
        
         while destValue != lca:
             direc = self.hash_map[destValue][1]
