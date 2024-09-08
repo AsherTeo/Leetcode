@@ -1,0 +1,42 @@
+class Solution:
+    def getDirections(self, root: Optional[TreeNode], startValue: int, destValue: int) -> str:
+        self.hash_map = Counter()
+
+        def build_dic(node, parent, directions):
+            if not node:
+                return
+            if parent:
+                self.hash_map[node.val] = (parent.val , directions)
+            else:
+                self.hash_map[node.val] = (None, "")
+            build_dic(node.left, node, 'L')
+            build_dic(node.right, node, 'R')
+
+        def find_lca(p, q):
+            seen = set()
+            while p:
+                seen.add(p)
+                p = self.hash_map[p][0]
+            while q not in seen:
+                q = self.hash_map[q][0]
+            return q
+
+        build_dic(root, None, "")
+        lca = find_lca(startValue, destValue)
+
+        count = 0
+        dest_res = []
+
+        while startValue != lca:
+            count += 1
+            startValue = self.hash_map[startValue][0]
+
+        start_res = ["U" for _ in range(count)]
+       
+        while destValue != lca:
+            direc = self.hash_map[destValue][1]
+            dest_res.append(direc)
+
+            destValue = self.hash_map[destValue][0]
+        
+        return''.join(start_res + dest_res[::-1])
