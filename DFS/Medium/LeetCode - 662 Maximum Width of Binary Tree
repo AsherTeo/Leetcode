@@ -1,0 +1,23 @@
+class Solution:
+    def widthOfBinaryTree(self, root: Optional[TreeNode]) -> int:
+        
+        stack = [(root, 1, 1)]
+        hash_map = defaultdict(list)
+        max_length = 0
+        
+        while stack:
+            node, index, depth = stack.pop()
+
+            hash_map[depth].append(index)
+
+            if node.right:
+                stack.append((node.right, index * 2 + 1, depth + 1))
+            if node.left:
+                stack.append((node.left, index * 2, depth + 1))
+        
+        for key, val in hash_map.items():
+            if len(val) > 1:
+                max_length = max(max_length, val[-1] - val[0] + 1)
+            else:
+                max_length = max(max_length, 1)
+        return max_length
