@@ -1,0 +1,29 @@
+class Solution:
+    def maxAreaOfIsland(self, grid: List[List[int]]) -> int:
+        self.visited = set()
+        self.ans = []    
+       
+        def dfs(i,j):
+            res = []
+            if i < 0 or i >= len(grid) or j < 0 or j >= len(grid[0]) or grid[i][j] == 0:
+                return
+
+            if (i,j) in self.visited:
+                return
+
+            self.visited.add((i,j))
+            self.count += 1
+            
+            dfs(i + 1, j)
+            dfs(i - 1, j)
+            dfs(i, j + 1)
+            dfs(i, j - 1)
+
+        for i in range(len(grid)):
+            for j in range(len(grid[0])):
+                self.count = 0
+                if (i, j) not in self.visited and grid[i][j] == 1:
+                    dfs(i,j)
+                    self.ans.append(self.count)
+
+        return max(self.ans) if self.ans else 0
