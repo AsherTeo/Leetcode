@@ -1,0 +1,28 @@
+class Solution:
+    def findMaxFish(self, grid: List[List[int]]) -> int:
+        self.visit = set()
+        self.max_fish = 0
+
+        def dfs(i,j):
+            if i < 0 or i >= len(grid) or j < 0 or j >= len(grid[0]) or grid[i][j] == 0:
+                return
+
+            if (i,j) in self.visit:
+                return
+
+            self.visit.add((i,j)) 
+            self.fishes += grid[i][j]
+
+            dfs(i + 1, j)
+            dfs(i - 1, j)
+            dfs(i, j + 1)
+            dfs(i, j - 1)
+
+        for i in range(len(grid)):
+            for j in range(len(grid[0])):
+                self.fishes = 0
+                if (i,j) not in self.visit and grid[i][j] > 0:
+                    dfs(i,j)
+                    self.max_fish = max(self.max_fish, self.fishes)
+                    
+        return self.max_fish
