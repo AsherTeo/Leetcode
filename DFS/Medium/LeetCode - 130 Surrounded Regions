@@ -1,0 +1,29 @@
+
+Use DFS to map those grid that has 'O' at the border. Then change to 'X' if is not inside the map.
+
+class Solution:
+    def solve(self, board: List[List[str]]) -> None:
+        rows, cols = len(board), len(board[0])
+        self.border = set()
+
+        def dfs(i,j):
+            if i < 0 or i >= rows or j < 0 or j >= cols or board[i][j] == 'X':
+                return
+            if (i,j) in self.border:
+                return
+            self.border.add((i,j))
+            dfs(i + 1, j)
+            dfs(i - 1, j)
+            dfs(i, j + 1)
+            dfs(i, j - 1)
+
+        for i in range(rows):
+            for j in range(cols):
+                if board[i][j] == 'O' and (i == 0 or i == rows - 1 or j == 0 or j == cols - 1):
+                    dfs(i,j)
+
+        for i in range(rows):
+            for j in range(cols):
+                if (i, j) not in self.border:
+                    board[i][j] = 'X'
+        return board
