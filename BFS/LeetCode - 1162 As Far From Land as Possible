@@ -1,0 +1,32 @@
+class Solution:
+    def maxDistance(self, grid: List[List[int]]) -> int:
+        self.visit = set()
+        q = deque()
+        n = len(grid)
+        directions = [[1,0], [0,1], [-1, 0], [0,-1]]
+        land, sea = 0, 0
+        for i in range(n):
+            for j in range(n):
+                if grid[i][j] == 1:
+                    land += 1
+                    q.append((i,j))
+                    self.visit.add((i,j))
+
+                if grid[i][j] == 0:
+                    sea += 1
+
+        if land == 0 or sea ==0:
+            return -1
+        level = -1
+
+        while q:
+            for _ in range(len(q)):
+                r, c = q.popleft()
+                for x, y in directions:
+                    row, col = r + x, c + y
+                    if 0 <= row < n and 0 <= col < n and (row, col) not in self.visit:
+                        q.append((row, col))
+                        self.visit.add((row, col))
+            level += 1
+
+        return level 
