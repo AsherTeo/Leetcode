@@ -1,0 +1,29 @@
+class Solution:
+    def getFood(self, grid: List[List[str]]) -> int:
+        self.visit = set()
+        rows, cols = len(grid), len(grid[0])
+
+        def find_start(grid):
+            for i in range(rows):
+                for j in range(cols):
+                    if grid[i][j] == '*':
+                        return (i,j)
+
+        i , j = find_start(grid)
+        directions = [[0,1], [1,0], [-1, 0], [0,-1]]
+        q = deque([(i,j)])
+        
+        path = 1
+        while q:
+            for _ in range(len(q)):
+                r,c = q.popleft()
+                for x, y in directions:
+                    row, col = r + x, c + y
+                    if 0 <= row < rows and 0 <= col < cols and (row, col) not in self.visit:
+                        if grid[row][col] == '#':
+                            return path
+                        if grid[row][col] == 'O':
+                            q.append((row,col))
+                            self.visit.add((row, col))
+            path += 1
+        return -1
