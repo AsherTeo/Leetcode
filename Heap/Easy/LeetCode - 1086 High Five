@@ -1,0 +1,13 @@
+class Solution:
+    def highFive(self, items: List[List[int]]) -> List[List[int]]:
+        hash_map = defaultdict(list)
+        res = []
+        
+        for id, score in items:
+            hash_map[id].append(score)
+        hash_map = dict(sorted(hash_map.items()))
+
+        for id, score in hash_map.items():
+            ave = floor(mean(heapq.nlargest(5, score)))
+            res.append([id, ave])
+        return res
