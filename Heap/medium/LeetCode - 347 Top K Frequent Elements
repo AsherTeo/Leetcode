@@ -1,0 +1,18 @@
+import heapq
+
+class Solution:
+    def topKFrequent(self, nums: List[int], k: int) -> List[int]:
+        hash_map = Counter(nums)
+        heap = []
+        res = []
+        count = 0
+        
+        for num, freq in hash_map.items():
+            heapq.heappush(heap, (-freq, num))
+
+        while heap and count < k:
+            freq, num = heapq.heappop(heap)
+            res.append(num)
+            count += 1
+        
+        return res
