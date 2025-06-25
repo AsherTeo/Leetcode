@@ -1,3 +1,26 @@
+################################################################ O(NLogN+KLogN) #####################################################
+
+class Solution:
+    def kthSmallestPrimeFraction(self, arr: List[int], k: int) -> List[int]:
+        
+        N = len(arr)
+        heap = []
+
+        for i in range(1, N):
+           heapq.heappush(heap, (arr[0] / arr[i], i, 0))
+
+        count = 0
+        while count < k:
+            value, i, j = heapq.heappop(heap)
+            if j + 1< len(arr):
+                heapq.heappush(heap, (arr[j + 1]/arr[i], i, j + 1))
+            count += 1
+
+        return [arr[j], arr[i]]
+
+
+################################################################ Slower #####################################################
+
 class Solution:
     def kthSmallestPrimeFraction(self, arr: List[int], k: int) -> List[int]:
         heap = []
