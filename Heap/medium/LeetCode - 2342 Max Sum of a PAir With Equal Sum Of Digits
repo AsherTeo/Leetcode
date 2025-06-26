@@ -1,0 +1,17 @@
+class Solution:
+    def maximumSum(self, nums: List[int]) -> int:
+        
+        hash_map = defaultdict(list)
+        str_num = [str(num) for num in nums]
+        
+        for string in str_num:
+            sum_digits = sum([int(s) for s in string])
+            hash_map[sum_digits].append(int(string))
+
+        max_val = -1
+        for sum_digits, num_list in hash_map.items():
+            if len(num_list) > 1:
+                heap = heapq.nlargest(2, num_list)
+                sum_list = sum(heap)
+                max_val = max(max_val, sum_list)
+        return max_val
