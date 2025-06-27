@@ -1,0 +1,16 @@
+class Solution:
+    def getDecimalValue(self, head: Optional[ListNode]) -> int:
+        current = head
+        res = []
+
+        while current:
+            res.append(current.val)
+            current = current.next
+        
+        i = 0
+        total = 0
+        while res:
+            digit = res.pop()
+            total += (digit) * (2**i)
+            i += 1
+        return total
