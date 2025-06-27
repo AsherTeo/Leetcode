@@ -1,0 +1,9 @@
+class Solution:
+    def toArray(self, root: 'Optional[Node]') -> List[int]:
+        res = []
+        current = root
+        
+        while current:
+            res.append(current.val)
+            current = current.next
+        return res
