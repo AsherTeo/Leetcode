@@ -1,0 +1,30 @@
+class Solution:
+    def gameResult(self, head: Optional[ListNode]) -> str:
+        freq = {'Even': 0, "Odd": 0}
+
+        slow = head
+        fast = head.next
+
+        while fast:
+            if fast.val > slow.val:
+                if fast.val %2 == 0:
+                    freq["Even"] += 1
+                else:
+                    freq["Odd"] += 1
+            else:
+                if slow.val %2 == 0:
+                    freq["Even"] += 1
+                else:
+                    freq["Odd"] += 1
+
+            if fast.next is None:
+                break
+            slow = slow.next.next
+            fast = fast.next.next
+
+        if freq['Odd'] > freq['Even']:
+            return 'Odd'
+        elif freq['Even'] > freq['Odd']:
+            return 'Even'
+        else:
+            return 'Tie'
