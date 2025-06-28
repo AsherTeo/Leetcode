@@ -1,0 +1,19 @@
+class Solution:
+    def deleteDuplicates(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        if head is None:
+            return None
+
+        slow = head
+        fast = head.next
+        dummy = ListNode(0)
+        tail = dummy 
+
+        while fast:
+            if fast.val != slow.val:
+                tail.next = ListNode(slow.val)
+                tail = tail.next
+            fast = fast.next
+            slow = slow.next
+
+        tail.next = ListNode(slow.val)
+        return dummy.next
