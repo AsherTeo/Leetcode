@@ -1,0 +1,28 @@
+class Solution:
+    def deleteDuplicates(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        if head is None:
+            return None
+        freq = {}
+
+        current = head
+
+        while current:
+            if current.val not in freq:
+                freq[current.val] = 1
+            else:
+                freq[current.val] += 1
+            current = current.next
+        slow = head
+        fast = head.next
+        dummy = ListNode(0)
+        tail = dummy
+
+        while fast:
+            if freq[slow.val] == 1:
+                tail.next = ListNode(slow.val)
+                tail = tail.next
+            slow = slow.next
+            fast = fast.next
+        if freq[slow.val] == 1:
+            tail.next = ListNode(slow.val)
+        return dummy.next
