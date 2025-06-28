@@ -12,17 +12,15 @@ class Solution:
             else:
                 freq[current.val] += 1
             current = current.next
-        slow = head
-        fast = head.next
+        
         dummy = ListNode(0)
         tail = dummy
-
-        while fast:
-            if freq[slow.val] == 1:
-                tail.next = ListNode(slow.val)
+        curr = head
+        
+        while curr:
+            if freq[curr.val] == 1:
+                tail.next = ListNode(curr.val)
                 tail = tail.next
-            slow = slow.next
-            fast = fast.next
-        if freq[slow.val] == 1:
-            tail.next = ListNode(slow.val)
+            curr = curr.next
+
         return dummy.next
