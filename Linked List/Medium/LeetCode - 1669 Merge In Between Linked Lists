@@ -1,0 +1,19 @@
+class Solution:
+    def mergeInBetween(self, list1: ListNode, a: int, b: int, list2: ListNode) -> ListNode:
+        count = 0
+        curr1 = list1
+        current1 = list1
+        current2 = list2
+
+        for _ in range(b + 1):
+            curr1 = curr1.next
+
+        while current1.next:
+            if count == (a - 1):
+                current1.next = current2
+            current1 = current1.next
+            count += 1
+
+        current1.next = curr1
+        
+        return list1
