@@ -1,3 +1,6 @@
+
+Find Middle > Split into two list > reverse the second list > two pointer
+
 class Solution:
     def pairSum(self, head: Optional[ListNode]) -> int:
         slow = head
