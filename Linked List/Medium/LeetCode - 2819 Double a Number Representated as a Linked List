@@ -1,0 +1,31 @@
+class Solution:
+    def doubleIt(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        def reverse(list1):
+            current = list1
+            prev = None
+
+            while current:
+                temp = current.next
+                current.next = prev
+                prev = current
+                current = temp
+            return prev
+
+        current1 = reverse(head)
+        current2 = current1
+        
+        carry = 0
+        tail = dummy = ListNode(0)
+
+        while current1 and current2:
+            total = current1.val + current2.val + carry
+            carry = total // 10
+            total = total % 10
+            tail.next = ListNode(total)
+
+            tail = tail.next
+            current1 = current1.next
+            current2 = current2.next
+        if carry > 0 :
+            tail.next = ListNode(1)
+        return reverse(dummy.next)
