@@ -1,0 +1,24 @@
+class Solution:
+    def isEvenOddTree(self, root: Optional[TreeNode]) -> bool:
+        queue = deque([(root, 0)])
+        res = []
+
+        while queue:
+            current = []
+            for _ in range(len(queue)):
+                node , depth = queue.popleft()
+                if depth % 2 == 0 and node.val%2 == 0:
+                    return False
+                if depth % 2 != 0 and node.val%2 != 0:
+                    return False
+                current.append(node.val)
+                if node.left:
+                    queue.append((node.left, depth + 1))
+                if node.right:
+                    queue.append((node.right, depth + 1))
+
+            if depth %2 == 0 and sorted(list(set(current))) != current:
+                return False
+            if depth %2 != 0 and sorted(list(set(current)), reverse = True) != current:
+                return False
+        return True 
