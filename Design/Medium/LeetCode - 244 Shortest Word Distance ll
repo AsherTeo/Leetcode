@@ -1,0 +1,19 @@
+######################### Nested Loop ########################################
+
+class WordDistance:
+
+    def __init__(self, wordsDict: List[str]):
+        self.dict = defaultdict(list)
+
+        for i, word in enumerate(wordsDict):
+            self.dict[word].append(i)
+
+    def shortest(self, word1: str, word2: str) -> int:
+        nums1 = self.dict[word1]
+        nums2 = self.dict[word2]
+        distance = float('inf')
+        for i in range(len(nums1)):
+            for j in range(len(nums2)):
+                diff = abs(nums1[i] - nums2[j])
+                distance = min(distance, diff)
+        return distance
