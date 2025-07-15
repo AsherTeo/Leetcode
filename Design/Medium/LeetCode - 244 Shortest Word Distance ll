@@ -17,3 +17,28 @@ class WordDistance:
                 diff = abs(nums1[i] - nums2[j])
                 distance = min(distance, diff)
         return distance
+
+######################### Two Pointer ########################################
+
+class WordDistance:
+
+    def __init__(self, wordsDict: List[str]):
+        self.dict = defaultdict(list)
+
+        for i, word in enumerate(wordsDict):
+            self.dict[word].append(i)
+
+    def shortest(self, word1: str, word2: str) -> int:
+        nums1 = self.dict[word1]
+        nums2 = self.dict[word2]
+        distance = float('inf')
+        i, j = 0, 0
+
+        while i < len(nums1) and j < len(nums2):
+            diff = abs(nums1[i] - nums2[j])
+            distance = min(distance, diff)
+            if nums1[i] < nums2[j]:
+                i += 1
+            else:
+                j += 1
+        return distance
