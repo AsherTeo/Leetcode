@@ -1,0 +1,21 @@
+class Solution:
+    def canReach(self, arr: List[int], start: int) -> bool:
+        if arr[start] == 0:
+            return True
+            
+        N = len(arr)
+        queue = deque([start])
+        directions = [1, -1]
+        visited = set([start])
+        res = False
+
+        while queue:
+            index = queue.popleft()
+            for direction in directions:
+                new_index = index + (direction * arr[index])
+                if 0 <= new_index < N and new_index not in visited:
+                    if arr[new_index] == 0:
+                        return True
+                    queue.append(new_index)
+                    visited.add(new_index)
+        return res
