@@ -1,0 +1,24 @@
+class Solution:
+    def coinChange(self, coins: List[int], amount: int) -> int:
+        if amount == 0:
+            return 0
+        
+        if len(coins) == 1 and coins[0] > amount:
+            return -1
+
+        queue = deque()
+        visited = set([0])
+        
+        for coin in coins:
+            queue.append((coin, coin, 1))
+    
+        while queue:
+            coin, total, count = queue.popleft()
+            if total == amount:
+                return count
+            for c in coins:
+                total_amount = total + c
+                if total < amount and total_amount not in visited:
+                    queue.append((c, total_amount, count + 1))
+                    visited.add(total_amount)
+        return -1
