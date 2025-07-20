@@ -1,0 +1,18 @@
+class Solution:
+    def getImportance(self, employees: List['Employee'], id: int) -> int:
+        total = 0
+
+        hashmap = defaultdict(list)
+        for i in range(len(employees)):
+            hashmap[employees[i].id].append((employees[i].importance, employees[i].subordinates))
+
+        queue = deque(hashmap[id][0][1])
+        total += hashmap[id][0][0]
+
+        while queue:
+            
+            child_index = queue.popleft()
+            total += hashmap[child_index][0][0]
+            queue.extend(hashmap[child_index][0][1])  
+            
+        return total 
