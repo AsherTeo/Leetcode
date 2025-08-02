@@ -1,3 +1,5 @@
+################################### Iterative DFS #################################################
+
 class Solution:
     def validTree(self, n: int, edges: List[List[int]]) -> bool:
         graph = defaultdict(list)
@@ -21,4 +23,32 @@ class Solution:
                     continue
                 if new_cur not in visited:
                     stack.append((new_cur, cur))
+        return len(visited) == n
+
+################################### Recursion DFS #################################################
+
+class Solution:
+    def validTree(self, n: int, edges: List[List[int]]) -> bool:
+        graph = defaultdict(list)
+
+        for a, b in edges:
+            graph[a].append(b)
+            graph[b].append(a)
+
+        visited = set()
+
+        def dfs(cur, prev):
+            if cur in visited:
+                return False
+
+            visited.add(cur)
+
+            for next_cur in graph[cur]:
+                if next_cur == prev:
+                    continue
+                if not dfs(next_cur, cur):
+                    return False
+            return True
+        if not dfs(0, -1):
+            return False
         return len(visited) == n
