@@ -1,0 +1,24 @@
+class Solution:
+    def validTree(self, n: int, edges: List[List[int]]) -> bool:
+        graph = defaultdict(list)
+
+        for a, b in edges:
+            graph[a].append(b)
+            graph[b].append(a)
+
+        stack = [(0, -1)]
+        visited = set()
+
+        while stack:
+            cur, prev = stack.pop()
+            if cur in visited:
+                return False
+
+            visited.add(cur)
+
+            for new_cur in graph[cur]:
+                if new_cur == cur:
+                    continue
+                if new_cur not in visited:
+                    stack.append((new_cur, cur))
+        return len(visited) == n
