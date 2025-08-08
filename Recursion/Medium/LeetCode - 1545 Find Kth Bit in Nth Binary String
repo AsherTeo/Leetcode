@@ -1,0 +1,19 @@
+class Solution:
+    def findKthBit(self, n: int, k: int) -> str:
+        def reverse(n):
+            n = n[::-1]
+            new_string = ''
+
+            for string in n:
+                if string == '0':
+                    new_string += '1'
+                elif string == '1':
+                    new_string += '0'
+            return new_string
+        
+        def recursion(n , s):
+            if n == 1:
+                return s
+            return recursion(n - 1, s + '1' + reverse(s))   
+
+        return recursion(n, '0')[k - 1]
