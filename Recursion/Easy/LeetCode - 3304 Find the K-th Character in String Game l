@@ -1,0 +1,16 @@
+class Solution:
+    def kthCharacter(self, k: int) -> str:
+        
+        def convert(s):
+            new_string = ''
+            for string in s:
+                new_string += chr(ord(string) + 1) # Does not work for 'z' but the constraints does not reach 'z'
+            return new_string
+
+        def recursion(s, k):
+            if len(s) >= k:
+                return s
+            
+            return recursion(s + convert(s), k)
+
+        return recursion('a', k)[k - 1]
