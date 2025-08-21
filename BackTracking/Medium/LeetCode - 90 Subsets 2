@@ -1,0 +1,21 @@
+class Solution:
+    def subsetsWithDup(self, nums: List[int]) -> List[List[int]]:
+        res = []
+        temp = []
+        nums.sort()
+        
+        def backtracking(i):
+            res.append(temp[:])
+            used = set()
+
+            for j in range(i, len(nums)):
+                if nums[j] in used:
+                    continue
+
+                temp.append(nums[j])
+                used.add(nums[j])
+                backtracking(j + 1)
+                temp.pop()
+
+        backtracking(0)
+        return res
