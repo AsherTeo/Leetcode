@@ -1,0 +1,29 @@
+class Solution:
+    def permuteUnique(self, nums: List[int]) -> List[List[int]]:
+        res = []
+        temp = []
+        seen = set()
+
+        def backtracking():
+            if len(temp) == len(nums):
+                res.append(temp[:])
+                return
+
+            used = set()
+
+            for i in range(len(nums)):
+                if nums[i] in used:
+                    continue
+
+                if i not in seen:
+                    temp.append(nums[i])
+                    seen.add(i)
+                    used.add(nums[i])
+                    
+                    backtracking()
+
+                    temp.pop()
+                    seen.remove(i)
+
+        backtracking()
+        return res
