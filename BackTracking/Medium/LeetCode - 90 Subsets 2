@@ -19,3 +19,24 @@ class Solution:
 
         backtracking(0)
         return res
+
+################################################################### Method 2 ######################################################
+
+class Solution:
+    def subsetsWithDup(self, nums: List[int]) -> List[List[int]]:
+        res = []
+        temp = []
+        nums.sort()
+
+        def backtracking(i):
+            res.append(temp[:])
+
+            for j in range(i, len(nums)):
+                if j > i and nums[j] == nums[j - 1]:
+                    continue
+                temp.append(nums[j])
+                backtracking(j + 1)
+                temp.pop()
+
+        backtracking(0)
+        return res
