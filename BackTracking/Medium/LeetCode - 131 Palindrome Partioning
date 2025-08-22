@@ -1,0 +1,22 @@
+class Solution:
+    def partition(self, s: str) -> List[List[str]]:
+        res = []
+        temp = []
+
+        def IsPalindrome(ss):
+            return ss == ss[::-1]
+
+        def backtracking(i):
+            if i == len(s):
+                res.append(temp[:])
+                return
+            
+            for j in range(i, len(s)):
+                sub_s = s[i: j + 1]
+                if IsPalindrome(sub_s):
+                    temp.append(sub_s)
+                    backtracking(j + 1)
+                    temp.pop()
+
+        backtracking(0)
+        return res
