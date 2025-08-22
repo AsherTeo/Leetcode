@@ -1,0 +1,25 @@
+class Solution:
+    def findDifferentBinaryString(self, nums: List[str]) -> str:
+        n = len(nums[0])
+        temp = []
+
+        def backtracking():
+            ss = ''.join(temp[:])
+            if len(temp) == n:
+                if ss not in nums:
+                    return ss
+                return None
+            
+            temp.append('0')
+            res = backtracking()
+            if res:
+                return res
+            temp.pop()
+
+            temp.append('1')
+            res = backtracking()
+            if res:
+                return res
+            temp.pop()
+
+        return backtracking()
