@@ -1,0 +1,29 @@
+class Solution:
+    def numTilePossibilities(self, tiles: str) -> int:
+        temp = []
+        seen = set()
+        count = 0
+
+        def backtracking():
+            nonlocal count
+
+            if temp:
+                count += 1
+
+            used = set()
+
+            for j in range(len(tiles)):
+                if tiles[j] in used:
+                    continue
+                if j not in seen:
+                    temp.append(tiles[j])
+                    seen.add(j)
+                    used.add(tiles[j])
+
+                    backtracking()
+
+                    temp.pop()
+                    seen.remove(j)
+
+        backtracking()
+        return count
