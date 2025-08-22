@@ -1,0 +1,25 @@
+class Solution:
+    def maxUniqueSplit(self, s: str) -> int:
+        res = []
+        temp = []
+        max_num = 0
+        def backtracking(i, seen):
+            nonlocal max_num
+
+            if i == len(s):
+                max_num = max(max_num, len(temp[:]))
+                return
+            
+            for j in range(i, len(s)):
+                sub_s = s[i: j + 1]
+                if sub_s not in seen:
+                    temp.append(sub_s)
+                    seen.add(sub_s)
+
+                    backtracking(j + 1, seen)
+
+                    temp.pop()
+                    seen.remove(sub_s)
+
+        backtracking(0, set())
+        return max_num
