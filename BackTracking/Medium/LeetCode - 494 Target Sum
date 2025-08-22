@@ -1,0 +1,26 @@
+####################################### TLE ########################################
+
+class Solution:
+    def findTargetSumWays(self, nums: List[int], target: int) -> int:
+        res = []
+        temp = []
+        count = 0
+
+        def backtracking(i, cur_sum):
+            nonlocal count
+
+            if i == len(nums):
+                if cur_sum == target:
+                    count += 1
+                return
+            
+            temp.append(nums[i])
+            backtracking(i + 1, cur_sum + nums[i])
+            temp.pop()
+
+            temp.append(-nums[i])
+            backtracking(i + 1, cur_sum - nums[i])
+            temp.pop()
+
+        backtracking(0,0)
+        return count
