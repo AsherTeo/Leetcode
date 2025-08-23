@@ -1,0 +1,39 @@
+class Solution:
+    def minimumBeautifulSubstrings(self, s: str) -> int:
+        res = []
+        temp = []
+        min_substr = float('inf')
+        
+        n = len(s)
+        five_power = []
+
+        i = 0
+        
+        while 5**i < 2**n:
+            five_power.append(5**i)
+            i += 1
+
+        def backtracking(i):
+
+            nonlocal min_substr
+
+            ss = ''.join(temp)
+            if len(ss) == n:
+                min_substr = min(min_substr, len(temp))
+                return
+            
+            for j in range(i, n):
+                sub_s = s[i: j + 1]
+                if sub_s[0] == '0':
+                    break
+
+                if int(sub_s,2) in five_power or int(sub_s) == 1:
+                    temp.append(sub_s)
+                    backtracking(j + 1)
+                    temp.pop()
+
+        backtracking(0)
+
+        if min_substr == float('inf'):
+            return -1
+        return min_substr
