@@ -1,0 +1,21 @@
+class Solution:
+    def validStrings(self, n: int) -> List[str]:
+        res = []
+        temp = []
+
+        def backtracking():
+            if len(temp) == n:
+                res.append(''.join(temp[:]))
+                return
+            
+            if not temp or temp[-1] != '0':
+                temp.append('0')
+                backtracking()
+                temp.pop()
+
+            temp.append('1')
+            backtracking()
+            temp.pop()
+        
+        backtracking()
+        return res
