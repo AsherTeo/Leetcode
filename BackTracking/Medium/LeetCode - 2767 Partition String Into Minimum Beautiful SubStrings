@@ -5,12 +5,12 @@ class Solution:
         min_substr = float('inf')
         
         n = len(s)
-        five_power = []
+        five_power = set()
 
         i = 0
-        
+
         while 5**i < 2**n:
-            five_power.append(5**i)
+            five_power.add(5**i)
             i += 1
 
         def backtracking(i):
@@ -27,7 +27,7 @@ class Solution:
                 if sub_s[0] == '0':
                     break
 
-                if int(sub_s,2) in five_power or int(sub_s) == 1:
+                if int(sub_s,2) in five_power:
                     temp.append(sub_s)
                     backtracking(j + 1)
                     temp.pop()
