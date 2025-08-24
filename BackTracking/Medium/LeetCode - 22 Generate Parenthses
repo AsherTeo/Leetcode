@@ -1,0 +1,22 @@
+class Solution:
+    def generateParenthesis(self, n: int) -> List[str]:
+        res = []
+        temp = []
+
+        def backtracking(open, close):
+            if len(temp) == n * 2:
+                res.append(''.join(temp[:]))
+                return
+
+            if open > 0 :
+                temp.append('(')
+                backtracking(open - 1, close)
+                temp.pop()
+
+            if close > open:
+                temp.append(')')
+                backtracking(open, close - 1)
+                temp.pop()
+
+        backtracking(n,n)
+        return res
