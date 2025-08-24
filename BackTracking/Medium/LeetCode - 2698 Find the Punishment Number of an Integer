@@ -1,0 +1,25 @@
+class Solution:
+    def punishmentNumber(self, n: int) -> int:
+        total = 0
+        res = []
+  
+        def backtracking(i, nums, target, n):
+
+            if sum(temp) == target and i == n:
+                return int(nums)
+
+            for j in range(i, len(nums)):
+                sub_s = int(nums[i : j + 1])
+                temp.append(sub_s)
+                
+                ans = backtracking(j + 1, nums, target, n)
+                if ans:
+                    return ans
+                temp.pop()
+            return 0
+
+        for num in range(1, n + 1):
+            nums = str(num * num)
+            temp = []
+            total += backtracking(0, nums, num, len(nums))
+        return total
