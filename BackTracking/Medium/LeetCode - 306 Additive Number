@@ -1,0 +1,36 @@
+class Solution:
+    def isAdditiveNumber(self, num: str) -> bool:
+        temp = []
+
+        freq = Counter(num)
+
+        if len(freq) == 1 and list(freq.keys())[0] != '0':
+            return False
+
+        if len(num) < 3:
+            return False
+
+        def isValid(temp):
+            for i in range(2, len(temp)):
+                if int(temp[i - 2]) + int(temp[i - 1]) != int(temp[i]):
+                    return False
+            return True
+
+        def backtracking(i):
+            if i == len(num):
+                if len(temp) > 2 and isValid(temp):
+                    return True
+                return False
+
+            for j in range(i, len(num)):
+                sub_s = num[i : j + 1]
+                if len(sub_s) > 1 and sub_s[0] == '0':
+                    break
+                temp.append(sub_s)
+                ans = backtracking(j + 1)
+                if ans:
+                    return True
+                temp.pop()
+            return False
+            
+        return backtracking(0)
