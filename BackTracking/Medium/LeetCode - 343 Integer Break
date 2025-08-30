@@ -1,0 +1,28 @@
+class Solution:
+    def integerBreak(self, n: int) -> int:
+        if n == 2:
+            return 1
+
+        if n == 3:
+            return 2
+
+        nums = [i for i in range(2, n)]
+        temp = []
+        max_prod = float('-inf')
+
+        def backtracking(i, cur_sum):
+            nonlocal max_prod 
+
+            if cur_sum == n:
+                max_prod = max(max_prod, math.prod(temp))
+                return 
+            
+            for j in range(i, len(nums)):
+                if cur_sum > n:
+                    break
+                temp.append(nums[j])
+                backtracking(j, cur_sum + nums[j])
+                temp.pop()
+
+        backtracking(0, 0)
+        return max_prod
