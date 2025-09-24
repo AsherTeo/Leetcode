@@ -1,0 +1,34 @@
+class Solution:
+    def maximumCostSubstring(self, s: str, chars: str, vals: List[int]) -> int:
+        hashmap = {}
+
+        for c,v in zip(chars, vals):
+            hashmap[c] = v
+
+        memo = {}
+
+        def dfs(i):
+            if i in memo:
+                return memo[i]
+
+            if i >= len(s):
+                return 0
+
+            total = 0
+            max_val = 0
+
+            if s[i] in hashmap:
+                num = hashmap.get(s[i])
+            else:
+                num = ord(s[i]) - ord('a') + 1
+
+            total = num + max(max_val, dfs(i + 1))
+
+            memo[i] = total
+
+            return memo[i]
+
+        ans = 0
+        for i in range(len(s)):
+            ans = max(ans, dfs(i))
+        return ans
