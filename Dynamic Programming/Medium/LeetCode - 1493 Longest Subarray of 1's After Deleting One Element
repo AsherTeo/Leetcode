@@ -1,0 +1,27 @@
+class Solution:
+    def longestSubarray(self, nums: List[int]) -> int:
+        memo = {}
+
+        def dfs(i, k):
+            if (i,k) in memo:
+                return memo[(i,k)]
+                
+            if i >= len(nums) or k < 0:
+                return 0
+
+            if nums[i] == 0:
+                k -= 1
+                
+            if k >= 0:
+                memo[(i,k)] = 1 + dfs(i + 1, k)
+            else:
+                memo[(i,k)] = 0
+
+            return memo[(i,k)]
+
+        longest = 0
+
+        for i in range(len(nums)):
+            longest = max(longest, dfs(i, 1))
+
+        return longest - 1
