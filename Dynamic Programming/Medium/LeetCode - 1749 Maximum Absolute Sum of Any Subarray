@@ -1,0 +1,35 @@
+class Solution:
+    def maxAbsoluteSum(self, nums: List[int]) -> int:
+        memo_max = {}
+        memo_min = {}
+
+        def dfs_max(i):
+            if i in memo_max:
+                return memo_max[i]
+
+            if i >= len(nums):
+                return 0
+
+            max_val = max(0, nums[i] + dfs_max(i + 1))
+            memo_max[i] = max_val
+            return memo_max[i]
+
+        def dfs_min(i):
+            if i in memo_min:
+                return memo_min[i]
+
+            if i >= len(nums):
+                return 0
+
+            min_val = min(0, nums[i] + dfs_min(i + 1))
+            memo_min[i] = min_val
+            return memo_min[i]
+
+        max_val = float('-inf')
+        min_val = float('inf')
+
+        for i in range(len(nums)):
+            max_val = max(max_val, dfs_max(i))
+            min_val = min(min_val, dfs_min(i))
+
+        return max(max_val, abs(min_val))
