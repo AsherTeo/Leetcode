@@ -1,0 +1,21 @@
+class Solution:
+    def numberOfArrays(self, s: str, k: int) -> int:
+        mod = 10**9 + 7
+        memo = {}
+
+        def dfs(i): 
+            if i in memo:
+                return memo[i]
+
+            if i >= len(s):
+                return 1
+            total = 0
+            for j in range(i, len(s)):
+                substring = s[i:j+1]
+                if substring[0] == '0' or int(substring) > k:
+                    break
+                total += dfs(j + 1)
+            memo[i] = total % mod
+            return memo[i]
+        
+        return dfs(0)
