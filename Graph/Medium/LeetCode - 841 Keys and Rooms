@@ -1,0 +1,18 @@
+class Solution:
+    def canVisitAllRooms(self, rooms: List[List[int]]) -> bool:
+        visited = set([0])
+
+        graph = {}
+
+        for i in range(len(rooms)):
+            graph[i] = rooms[i]
+        
+        def dfs(i):
+
+            for j in graph[i]:
+                if j not in visited:
+                    visited.add(j)
+                    dfs(j)
+
+        dfs(0)
+        return len(visited) == len(rooms)
