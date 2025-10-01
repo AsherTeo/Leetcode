@@ -1,0 +1,22 @@
+class Solution:
+    def allPathsSourceTarget(self, graph: List[List[int]]) -> List[List[int]]:
+        
+        hashmap = {}
+
+        for i , nums in enumerate(graph):
+            hashmap[i] = nums
+        
+        print(hashmap)
+        res = []
+        temp = [0]
+
+        def dfs(i):
+            if i == len(graph) - 1:
+                res.append(temp[:])
+            
+            for nei in hashmap[i]:
+                temp.append(nei)
+                dfs(nei)
+                temp.pop()
+        dfs(0)
+        return res
