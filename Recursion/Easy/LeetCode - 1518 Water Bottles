@@ -1,0 +1,34 @@
+class Solution:
+    def numWaterBottles(self, numBottles: int, numExchange: int) -> int:
+        total = numBottles
+
+        while numBottles // numExchange > 0:
+
+            exchange = numBottles // numExchange
+            remaining = numBottles % numExchange
+
+            total += exchange
+
+            numBottles = exchange + remaining
+        return total
+
+
+class Solution:
+    def numWaterBottles(self, numBottles: int, numExchange: int) -> int:
+        total = numBottles
+
+        def recursion(n):
+            nonlocal total
+
+            if n // numExchange == 0:
+                return 0
+
+            exchange = n // numExchange
+            remaining = n % numExchange
+
+            total += exchange
+
+            return recursion(exchange + remaining)
+
+        recursion(numBottles)
+        return total
