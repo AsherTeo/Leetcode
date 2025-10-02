@@ -1,0 +1,24 @@
+class Solution:
+    def minMutation(self, startGene: str, endGene: str, bank: List[str]) -> int:
+        if not bank or endGene not in bank:
+            return -1
+
+        q = deque()
+        q.append((startGene, 0))
+
+        genes = ['A', 'C', 'G', 'T']
+        visited = set()
+
+        while q:
+            node, count = q.popleft()
+
+            for i in range(8):
+                for gene in genes:
+                    string = node[:i] + gene + node[i + 1:]
+                    if string == endGene:
+                        return count + 1
+                    if string in bank and string not in visited:
+                        q.append((string, count + 1))
+                        visited.add(string)
+
+        return -1
