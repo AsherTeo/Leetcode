@@ -1,0 +1,46 @@
+class Solution:
+    def distanceK(self, root: TreeNode, target: TreeNode, k: int) -> List[int]:
+        if k == 0:
+            return [target.val]
+        
+        graph = defaultdict(list)
+
+        def dfs(node, parent):
+            if not node:
+                return
+
+            if node.left:
+                graph[node.val].append(node.left.val)
+                
+            if node.right:
+                graph[node.val].append(node.right.val)
+
+            if parent:
+                graph[node.val].append(parent.val)
+
+            dfs(node.left, node)
+            dfs(node.right, node)
+
+        dfs(root, None)
+
+        q = deque()
+        visited = set([target.val])
+
+        for num in graph[target.val]:
+            q.append((num , k - 1))
+            visited.add(num)
+
+        res = []
+        
+        while q:
+            
+            node, k = q.popleft()
+            
+            if k == 0:
+                res.append(node)
+                
+            for nei in graph[node]:
+                if nei not in visited:
+                    q.append((nei, k - 1))
+                    visited.add((nei))
+        return res
