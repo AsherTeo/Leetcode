@@ -1,0 +1,21 @@
+class Solution:
+    def maximalNetworkRank(self, n: int, roads: List[List[int]]) -> int:
+        if not roads:
+            return 0
+
+        graph = defaultdict(list)
+
+        for u,v in roads:
+            graph[u].append(v)
+            graph[v].append(u)
+
+        max_count = 0
+
+        for i in range(n):
+            for j in range(i + 1 , n):
+                if i in graph[j]:
+                    total_len = len(graph[i] + graph[j]) - 1
+                else:
+                    total_len = len(graph[i] + graph[j])
+                max_count = max(max_count, total_len)
+        return max_count
