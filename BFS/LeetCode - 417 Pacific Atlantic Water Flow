@@ -1,0 +1,65 @@
+class Solution:
+    def pacificAtlantic(self, heights: List[List[int]]) -> List[List[int]]:
+        m ,n = len(heights), len(heights[0])
+
+        pac_queue = deque()
+        atl_queue = deque()
+
+        pac_visited = set()
+        atl_visited = set()
+
+        pac_lst = set()
+        atl_lst = set()
+
+        for i in range(n):
+            pac_queue.append((0, i))
+            pac_visited.add((0,i))
+            pac_lst.add((0, i))
+
+        for j in range(m):
+            pac_queue.append((j, 0))
+            pac_visited.add((j, 0))
+            pac_lst.add((j, 0))
+
+        for i in range(n):
+            atl_queue.append((m - 1, i))
+            atl_visited.add((m - 1, i))
+            atl_lst.add((m - 1, i))
+
+        for j in range(m):
+            atl_queue.append((j, n - 1))
+            atl_visited.add((j, n - 1))
+            atl_lst.add((j, n - 1))
+
+        directions = [(1, 0), (0, 1), (-1, 0), (0, -1)]
+
+        while pac_queue:
+
+            row, col = pac_queue.popleft()
+
+            for x, y  in directions:
+                r, c = row + x, col + y
+                if 0 <= r < m and 0 <= c < n and (r, c) not in pac_visited and heights[row][col] <= heights[r][c]:
+                    pac_lst.add((r,c))
+                    pac_queue.append((r,c))
+                    pac_visited.add((r,c))
+
+        while atl_queue:
+
+            row, col = atl_queue.popleft()
+
+            for x, y in directions:
+                r, c = row + x, col + y
+                if 0 <= r < m and 0 <= c < n and (r, c) not in atl_visited and heights[row][col] <= heights[r][c]:
+                    atl_lst.add((r,c))
+                    atl_queue.append((r,c))
+                    atl_visited.add((r,c))
+
+        res = []
+        seen = set()
+
+        for x, y in pac_lst:
+            if (x,y) in atl_lst:
+                res.append([x,y])
+                seen.add((x,y))
+        return res
