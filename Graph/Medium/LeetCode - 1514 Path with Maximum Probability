@@ -1,0 +1,29 @@
+class Solution:
+    def maxProbability(self, n: int, edges: List[List[int]], succProb: List[float], start_node: int, end_node: int) -> float:
+        
+        graph = defaultdict(list)
+
+        for (u, v), w in zip(edges, succProb):
+            graph[u].append((v, w))
+            graph[v].append((u, w))
+
+        max_heap = [(-1, start_node)]
+        visited = set()
+
+        while max_heap:
+            cost, node = heapq.heappop(max_heap)
+
+            if node == end_node:
+                return -cost
+
+            if node in visited:
+                continue
+
+            visited.add(node)
+
+            for nei, cur_cost in graph[node]:
+                if nei not in visited:
+                    new_cost = cost * cur_cost
+                    heapq.heappush(max_heap, (new_cost, nei))
+                
+        return 0
