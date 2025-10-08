@@ -1,0 +1,26 @@
+class Solution:
+    def minTimeToReach(self, moveTime: List[List[int]]) -> int:
+        m ,n = len(moveTime), len(moveTime[0])
+
+        min_heap = [(0, 0, 0)]
+
+        visited = set([0,0])
+        directions = [(0, 1), (1, 0), (0, -1), (-1, 0)]
+
+        while min_heap:
+
+            cost, row, col = heapq.heappop(min_heap)
+
+            if (row, col) in visited:
+                continue
+
+            visited.add((row, col))
+
+            if row == m - 1 and col == n - 1:
+                return cost
+
+            for x, y in directions:
+                r, c = row + x, col + y
+                if 0 <= r < m and 0 <= c < n and (r,c) not in visited:
+                    new_cost = moveTime[r][c]
+                    heapq.heappush(min_heap, (max(cost, moveTime[r][c]) + 1, r, c))
