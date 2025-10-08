@@ -1,0 +1,29 @@
+class Solution:
+    def minTime(self, n: int, edges: List[List[int]]) -> int:
+        
+        graph = defaultdict(list)
+
+        for u, v, start, end in edges:
+            graph[u].append((v, start, end))
+       
+        min_heap = [(0, 0, 0)]
+        visited = set()
+
+        while min_heap:
+            start, end, node = heapq.heappop(min_heap)
+            
+            if node in visited:
+                continue
+
+            visited.add(node)
+            if node == n - 1:
+                return start
+
+            for nei, s, e in graph[node]: 
+             
+                if nei not in visited:
+                    if start > e:
+                        continue
+                    new_s = max(start, s) + 1
+                    heapq.heappush(min_heap, (new_s, e, nei))
+        return -1
