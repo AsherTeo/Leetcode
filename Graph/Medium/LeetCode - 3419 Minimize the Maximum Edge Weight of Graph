@@ -1,0 +1,27 @@
+class Solution:
+    def minMaxWeight(self, n: int, edges: List[List[int]], threshold: int) -> int:
+        
+        graph = defaultdict(list)
+
+        for u, v, w in edges:
+            graph[v].append((u, w))
+
+        min_heap = [(0, 0)]
+        visited = set()
+
+        while min_heap:
+            cost, node = heapq.heappop(min_heap)
+
+            if node in visited:
+                continue
+
+            visited.add(node)
+
+            if len(visited) == n:
+                return cost
+
+            for nei, next_cost in graph[node]:
+                if nei not in visited:
+                    new_cost = max(cost, next_cost)
+                    heapq.heappush(min_heap, (new_cost, nei))
+        return -1
