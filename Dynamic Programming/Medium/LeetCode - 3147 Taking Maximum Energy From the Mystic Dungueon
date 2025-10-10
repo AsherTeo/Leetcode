@@ -1,0 +1,22 @@
+class Solution:
+    def maximumEnergy(self, energy: List[int], k: int) -> int:
+        max_val = float('-inf')
+        
+        memo = {}
+
+        def dfs(i):
+            if i in memo:
+                return memo[i]
+
+            if i >= len(energy):
+                return 0
+
+            total = 0
+
+            total += energy[i] + dfs(i + k)
+            memo[i] = total
+            return memo[i]
+        
+        for i in range(len(energy)):
+            max_val = max(max_val,  dfs(i))
+        return max_val
