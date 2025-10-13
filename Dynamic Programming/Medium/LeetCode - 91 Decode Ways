@@ -1,0 +1,20 @@
+class Solution:
+    def numDecodings(self, s: str) -> int:
+        memo = {}
+
+        def dfs(i):
+            if i in memo:
+                return memo[i]
+
+            if i == len(s):
+                return 1
+
+            total = 0
+            for j in range(i, len(s)):
+                substring = s[i:j+1]
+                if substring[0] == '0' or int(substring) > 26:
+                    continue
+                total += dfs(j + 1)
+            memo[i] = total 
+            return memo[i]
+        return dfs(0)
